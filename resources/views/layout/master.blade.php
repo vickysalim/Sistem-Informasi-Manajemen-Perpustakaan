@@ -35,9 +35,9 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                         <div class="text-center p-2">
                             <img src="{{ asset('dist/img/avatar.png')}}" class="img-size-50 img-circle">
-                            <p class="mt-2 font-weight-bold">Name</p>
-                            <p class="mt-1 text-muted">Email</p>
-                            <p class="mt-1 text-muted">Role</p>
+                            <p class="mt-2 font-weight-bold">{{ Auth::User()->name }}</p>
+                            <p class="mt-1 text-muted">{{ Auth::User()->email }}</p>
+                            <p class="mt-1 text-muted">{{ Auth::User()->role }}</p>
                         </div>
                         <div class="dropdown-divider"></div>
                         {{-- <form method="POST" action="{{ route('logout') }}">
@@ -59,9 +59,9 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-list"></i>
-                                <p>Menu 1</p>
+                            <a href="{{ route('dashboard') }}" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>Beranda</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </section>
-            <div class="card p-2 m-2">
+            <div class="m-2">
                 <section class="content">
                     @yield('content')
                 </section>
