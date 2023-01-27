@@ -5,7 +5,7 @@
 @section('content')
     <!-- Statistics -->
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-sm-6 col-lg-3">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>100</h3>
@@ -17,7 +17,7 @@
                 <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-sm-6 col-lg-3">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>100</h3>
@@ -29,7 +29,7 @@
                 <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-sm-6 col-lg-3">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>100</h3>
@@ -41,7 +41,7 @@
                 <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-sm-6 col-lg-3">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>100</h3>
