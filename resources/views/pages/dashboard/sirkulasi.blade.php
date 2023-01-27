@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Masukkan Data Peminjaman Baru</h3>
+                    <h3 class="card-title">Tambah Data Peminjaman Baru</h3>
                 </div>
                 <form>
                     <div class="card-body">
@@ -21,7 +21,7 @@
                             <input type="number" class="form-control" id="idAnggota" placeholder="Masukkan ID Anggota">
                         </div>
                         <div class="form-group">
-                            <label for="idBuku">Password</label>
+                            <label for="idBuku">ID Buku</label>
                             <input type="number" class="form-control" id="idBuku" placeholder="Masukkan ID Buku">
                         </div>
                     </div>
