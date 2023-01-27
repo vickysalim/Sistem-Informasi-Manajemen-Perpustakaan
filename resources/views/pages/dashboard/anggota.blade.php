@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h6 class="mb-0"><i class="icon fas fa-ban"></i> Error! ID Anggota atau ID Buku yang Anda masukkan tidak ditemukan</h6>
+                            <h6 class="mb-0"><i class="icon fas fa-ban"></i> Error! Data yang Anda masukkan tidak valid</h6>
                         </div>
                         <div class="form-group">
                             <label for="idAnggota">ID Anggota</label>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idBuku">Nama</label>
-                            <input type="text" class="form-control" id="idBuku" placeholder="Masukkan ID Buku">
+                            <input type="text" class="form-control" id="idBuku" placeholder="Masukkan Nama">
                         </div>
                         <div class="form-group">
                             <label for="radioAktif">Status</label>
@@ -45,7 +45,7 @@
         <div class="col-12">
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Data Peminjaman</h3>
+                    <h3 class="card-title">Data Anggota</h3>
                 </div>
                 <div class="card-body">
                     <table class="table dt-responsive nowrap mt-2 dataTable no-footer dtr-inline collapsed" id="table">
@@ -95,12 +95,12 @@
       $('#table').DataTable({
         "responsive": true,
         "language": {
-            "lengthMenu": "Menampilkan _MENU_ data peminjaman per halaman",
-            "emptyTable": "<div style='margin: 16px;'>Belum ada data peminjaman</div>",
-            "zeroRecords": "<div style='margin: 16px;'>Data peminjaman tidak ditemukan</div>",
+            "lengthMenu": "Menampilkan _MENU_ data anggota per halaman",
+            "emptyTable": "<div style='margin: 16px;'>Belum ada data anggota</div>",
+            "zeroRecords": "<div style='margin: 16px;'>Data anggota tidak ditemukan</div>",
             "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            "infoEmpty": "Data peminjaman tidak ditemukan",
-            "infoFiltered": "(berdasarkan filter _MAX_ data peminjaman tersedia)",
+            "infoEmpty": "Data anggota tidak ditemukan",
+            "infoFiltered": "(berdasarkan filter _MAX_ data anggota tersedia)",
             "paginate": {
                 "first":      "Awal",
                 "last":       "Akhir",
