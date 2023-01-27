@@ -26,6 +26,10 @@ Route::get('/sirkulasi', function () {
     return view('pages.dashboard.sirkulasi');
 })->middleware(['auth'])->name('sirkulasi');
 
+Route::get('/anggota', function () {
+    return view('pages.dashboard.anggota');
+})->middleware(['auth'])->name('anggota');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
