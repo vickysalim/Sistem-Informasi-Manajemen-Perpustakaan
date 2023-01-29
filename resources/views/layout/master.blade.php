@@ -95,7 +95,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('laporan.anggota') }}" class="nav-link {{ Route::currentRouteName() == 'laporan.anggota' ? 'active' : '' }}" class="nav-link">
                                             <i class="fas fa-users nav-icon"></i>
                                             <p>Anggota</p>
                                         </a>
