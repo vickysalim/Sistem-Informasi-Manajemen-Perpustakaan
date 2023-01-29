@@ -84,20 +84,26 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-list"></i>
-                                    <p>Menu 2<i class="fas fa-angle-left right"></i></p>
+                                    <i class="nav-icon fas fa-chart-bar"></i>
+                                    <p>Laporan<i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fas fa-list nav-icon"></i>
-                                            <p>Submenu 1</p>
+                                        <a href="{{ route('laporan.transaksi') }}" class="nav-link {{ Route::currentRouteName() == 'laporan.transaksi' ? 'active' : '' }}" class="nav-link">
+                                            <i class="fas fa-balance-scale nav-icon"></i>
+                                            <p>Transaksi Peminjaman</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
-                                            <i class="fas fa-list nav-icon"></i>
-                                            <p>Submenu 2</p>
+                                            <i class="fas fa-users nav-icon"></i>
+                                            <p>Anggota</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-edit nav-icon"></i>
+                                            <p>Pengunjung</p>
                                         </a>
                                     </li>
                                 </ul>
