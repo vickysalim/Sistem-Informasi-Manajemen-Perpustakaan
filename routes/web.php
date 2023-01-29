@@ -42,6 +42,10 @@ Route::get('/laporan/anggota', function () {
     return view('pages.dashboard.laporan.anggota');
 })->middleware(['auth'])->name('laporan.anggota');
 
+Route::get('/laporan/pengunjung', function () {
+    return view('pages.dashboard.laporan.pengunjung');
+})->middleware(['auth'])->name('laporan.pengunjung');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
