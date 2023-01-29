@@ -77,6 +77,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('buku') }}" class="nav-link {{ Route::currentRouteName() == 'buku' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Buku</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-list"></i>
                                     <p>Menu 2<i class="fas fa-angle-left right"></i></p>
