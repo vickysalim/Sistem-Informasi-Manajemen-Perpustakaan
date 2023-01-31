@@ -7,42 +7,51 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.main.index');
+})->name('main');
+
+Route::get('/pengunjung', function () {
+    return view('pages.main.pengunjung');
+})->name('pengunjung');
+
+Route::get('/tentang', function () {
+    return view('pages.main.tentang');
+})->name('tentang');
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard.index');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/sirkulasi', function () {
+Route::get('/dashboard/sirkulasi', function () {
     return view('pages.dashboard.sirkulasi');
 })->middleware(['auth'])->name('sirkulasi');
 
-Route::get('/anggota', function () {
+Route::get('/dashboard/anggota', function () {
     return view('pages.dashboard.anggota');
 })->middleware(['auth'])->name('anggota');
 
-Route::get('/buku', function () {
+Route::get('/dashboard/buku', function () {
     return view('pages.dashboard.buku');
 })->middleware(['auth'])->name('buku');
 
-Route::get('/laporan/transaksi', function () {
+Route::get('/dashboard/laporan/transaksi', function () {
     return view('pages.dashboard.laporan.transaksi');
 })->middleware(['auth'])->name('laporan.transaksi');
 
-Route::get('/laporan/anggota', function () {
+Route::get('/dashboard/laporan/anggota', function () {
     return view('pages.dashboard.laporan.anggota');
 })->middleware(['auth'])->name('laporan.anggota');
 
-Route::get('/laporan/pengunjung', function () {
+Route::get('/dashboard/laporan/pengunjung', function () {
     return view('pages.dashboard.laporan.pengunjung');
 })->middleware(['auth'])->name('laporan.pengunjung');
 
