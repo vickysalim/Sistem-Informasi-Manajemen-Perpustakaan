@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DashboardIndexController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,10 @@ Route::get('/tentang', function () {
 Route::get('/dashboard', function () {
     return view('pages.dashboard.index');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/dashboard',
+    [DashboardIndexController::class, 'index']
+)->middleware(['auth'])->name('dashboard');
 
 Route::get('/dashboard/sirkulasi', function () {
     return view('pages.dashboard.sirkulasi');
