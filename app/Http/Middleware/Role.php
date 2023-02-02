@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class Role
 {
-    public function handle($request, Closure $next, $type)
+    public function handle($request, Closure $next, ...$roles)
     {
-     if (Auth::user() &&  Auth::user()->role == $type) {
-            return $next($request);
-     }
+      foreach($roles as $role) {
+        if (Auth::user() &&  Auth::user()->role == trim($role)) {
+          return $next($request);
+        }
+      }
+      
       return redirect('/dashboard');
     }
 }
