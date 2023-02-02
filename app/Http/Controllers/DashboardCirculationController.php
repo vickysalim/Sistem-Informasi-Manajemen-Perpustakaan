@@ -20,9 +20,16 @@ class DashboardCirculationController extends Controller
         // get loan duration data
         $loanDurationData = Setting::where('key', 'loan_duration')->first();
         $addDurationFormat = '+' . $loanDurationData->value . 'days';
-        $loanDuration = date('Y-m-d', strtotime($addDurationFormat));
 
         // check weekend
+        if (date('D', strtotime($addDurationFormat)) == 'Sat') {
+            $addDurationFormat = '+' . $loanDurationData->value + 2 . 'days';
+        } else if (date('D', strtotime($addDurationFormat)) == 'Sun') {
+            $addDurationFormat = '+' . $loanDurationData->value + 1 . 'days';
+        }
+        
+        // set return date
+        $returnDate = date('Y-m-d', strtotime($addDurationFormat));
 
         // validate
         $validate = $request->validate([
@@ -35,7 +42,7 @@ class DashboardCirculationController extends Controller
         $circulation->member_id = $validate['idAnggota'];
         $circulation->book_id = $validate['idBuku'];
         $circulation->loan_date = date('Y-m-d');
-        $circulation->return_date = $loanDuration;
+        $circulation->return_date = $returnDate;
         
         // save
         $circulation->save();
