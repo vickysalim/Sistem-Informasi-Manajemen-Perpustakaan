@@ -38,6 +38,10 @@ Route::get('/dashboard/sirkulasi',
     [DashboardCirculationController::class, 'index']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi');
 
+Route::post('/dashboard/sirkulasi',
+    [DashboardCirculationController::class, 'store']
+)->middleware(['role:Admin, Petugas'])->name('sirkulasi.store');
+
 Route::get('/dashboard/anggota', function () {
     return view('pages.dashboard.anggota');
 })->middleware(['auth'])->name('anggota');

@@ -15,4 +15,32 @@ class DashboardCirculationController extends Controller
         $circulationData = Circulation::all()->where('status', 'Berjalan');
         return view('pages.dashboard.sirkulasi', compact('fineData', 'circulationData'));
     }
+
+    public function store(Request $request) {
+        // get loan duration data
+        $loanDurationData = Setting::where('key', 'loan_duration')->first();
+        $addDurationFormat = '+' . $loanDurationData->value . 'days';
+        $loanDuration = date('Y-m-d', strtotime($addDurationFormat));
+
+        // check weekend
+
+        // validate
+        $validate = $request->validate([
+            'idAnggota' => 'required',
+            'idBuku' => 'required'
+        ]);
+
+        // store
+        $circulation = new Circulation();
+        $circulation->member_id = $validate['idAnggota'];
+        $circulation->book_id = $validate['idBuku'];
+        $circulation->loan_date = date('Y-m-d');
+        $circulation->return_date = $loanDuration;
+        
+        // save
+        $circulation->save();
+
+        // redirect
+        return redirect()->route('sirkulasi')->with('success', 'Berhasil menambahkan data sirkulasi');
+    }
 }

@@ -10,19 +10,28 @@
                 <div class="card-header">
                     <h3 class="card-title">Tambah Data Peminjaman Baru</h3>
                 </div>
-                <form>
+                <form action="{{ route('sirkulasi.store') }}" method="POST">
+                    @csrf
                     <div class="card-body">
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h6 class="mb-0"><i class="icon fas fa-ban"></i> Error! ID Anggota atau ID Buku yang Anda masukkan tidak ditemukan</h6>
-                        </div>
+                        @if (session()->has('danger'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h6 class="mb-0"><i class="icon fas fa-ban"></i> {{ session()->get('danger') }}</h6>
+                            </div>
+                        @endif
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h6 class="mb-0"><i class="icon fas fa-check"></i> {{ session()->get('success') }}</h6>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="idAnggota">ID Anggota</label>
-                            <input type="number" class="form-control" id="idAnggota" placeholder="Masukkan ID Anggota">
+                            <input type="number" class="form-control" id="idAnggota" name="idAnggota" placeholder="Masukkan ID Anggota">
                         </div>
                         <div class="form-group">
                             <label for="idBuku">ID Buku</label>
-                            <input type="number" class="form-control" id="idBuku" placeholder="Masukkan ID Buku">
+                            <input type="number" class="form-control" id="idBuku" name="idBuku" placeholder="Masukkan ID Buku">
                         </div>
                     </div>
                     <div class="card-footer">
