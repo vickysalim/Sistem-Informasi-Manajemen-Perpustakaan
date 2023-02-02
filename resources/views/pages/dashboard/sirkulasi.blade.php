@@ -34,7 +34,7 @@
         <div class="col-12">
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Data Peminjaman</h3>
+                    <h3 class="card-title">Data Peminjaman Aktif</h3>
                 </div>
                 <div class="card-body">
                     <table class="table dt-responsive nowrap mt-2 dataTable no-footer dtr-inline collapsed" id="table">
@@ -42,23 +42,43 @@
                             <tr>
                                 <th>Kode Buku</th>
                                 <th>Judul Buku</th>
+                                <th>Nomor Anggota</th>
+                                <th>Nama Anggota</th>
                                 <th>Tanggal Pinjam</th>
                                 <th>Tanggal Kembali</th>
                                 <th>Perpanjang</th>
+                                <th>Kembalikan</th>
                                 <th>Denda</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>ABC</td>
-                                <td>Buku 1</td>
-                                <td>27/01/2023</td>
-                                <td>29/01/2023</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm">Perpanjang</button>
-                                </td>
-                                <td>Rp 0</td>
-                            </tr>
+                            @foreach ($circulationData as $item)
+                                <tr>
+                                    <td>{{ $item->book_id }}</td>
+                                    <td>{{ $item->Book->name ?? 'N/A' }}</td>
+                                    <td>{{ $item->member_id }}</td>
+                                    <td>{{ $item->Member->name ?? 'N/A' }}</td>
+                                    <td>{{ $item->loan_date }}</td>
+                                    <td>{{ $item->return_date }}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm">Perpanjang</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm">Kembalikan</a>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $diff = date_diff(date_create(date('Y-m-d')), date_create($item->return_date));
+
+                                            if($diff->format('%R%a') < 0) {
+                                                echo 'Rp. ' . abs($diff->format('%R%a') * $fineData->value);
+                                            } else {
+                                                echo 'Rp. 0';
+                                            }
+                                        @endphp
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
