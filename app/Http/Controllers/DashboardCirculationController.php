@@ -50,4 +50,32 @@ class DashboardCirculationController extends Controller
         // redirect
         return redirect()->route('sirkulasi')->with('success', 'Berhasil menambahkan data sirkulasi');
     }
+
+    public function extend(Request $request, Circulation $circulation) {
+        // get current return date
+        $currentReturnDate = $circulation->return_date;
+
+        // get loan duration data
+        $loanDurationData = Setting::where('key', 'loan_duration')->first();
+        $addDurationFormat = $currentReturnDate . '+' . $loanDurationData->value . 'days';
+        
+        // check weekend
+        if (date('D', strtotime($addDurationFormat)) == 'Sat') {
+            $addDurationFormat = $currentReturnDate . '+' . $loanDurationData->value + 2 . 'days';
+        } else if (date('D', strtotime($addDurationFormat)) == 'Sun') {
+            $addDurationFormat = $currentReturnDate . '+' . $loanDurationData->value + 1 . 'days';
+        }
+        
+        // set return date
+        $returnDate = date('Y-m-d', strtotime($addDurationFormat));
+
+        // extend
+        Circulation::where('id', $circulation->id)
+            ->update([
+                'return_date' => $returnDate
+            ]);
+
+        // redirect
+        return redirect()->route('sirkulasi')->with('success', 'Berhasil menambah durasi peminjaman buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name);
+    }
 }
