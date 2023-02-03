@@ -53,6 +53,15 @@ class DashboardCirculationController extends Controller
     }
 
     public function extend(Request $request, Circulation $circulation) {
+        // get extend limit data
+        $currentExtendCount = $circulation->extend_count;
+        $extendLimitData = Setting::where('key', 'extend_limit')->first();
+
+        // if current extend count is equal or more than extend limit, return error
+        if ($currentExtendCount >= $extendLimitData->value) {
+            return redirect()->route('sirkulasi')->with('danger', 'Peminjaman buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name . ' sudah melebihi batas perpanjangan');
+        }
+
         // get current return date
         $currentReturnDate = $circulation->return_date;
 
@@ -70,10 +79,25 @@ class DashboardCirculationController extends Controller
         // set return date
         $returnDate = date('Y-m-d', strtotime($addDurationFormat));
 
+        // get fine data
+        $currentFineSum = $circulation->fine_sum;
+        $fineData = Setting::where('key', 'fine')->first();
+
+        // set fine
+        $diff = date_diff(date_create(date('Y-m-d')), date_create($circulation->return_date));
+        if($diff->format('%R%a') < 0) {
+            $totalFine = abs($diff->format('%R%a') * $fineData->value);
+        } else {
+            $totalFine = 0;
+        }
+
         // extend
         Circulation::where('id', $circulation->id)
             ->update([
-                'return_date' => $returnDate
+                'return_date' => $returnDate,
+                'extend_count' => $currentExtendCount + 1,
+                'latest_extend_date' => date('Y-m-d'),
+                'fine_sum' => $currentFineSum + $totalFine
             ]);
 
         // redirect

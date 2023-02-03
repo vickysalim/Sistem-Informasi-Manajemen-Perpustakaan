@@ -25,6 +25,11 @@ class SettingsSeeder extends Seeder
         ]);
 
         Setting::create([
+            'key' => 'extend_limit',
+            'value' => '3'
+        ]);
+
+        Setting::create([
             'key' => 'head_librarian',
             'value' => 'Head Librarian Name'
         ]);
