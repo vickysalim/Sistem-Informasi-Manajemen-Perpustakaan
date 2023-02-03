@@ -109,4 +109,34 @@ class DashboardCirculationController extends Controller
         // redirect
         return redirect()->route('sirkulasi')->with('success', 'Berhasil menambah durasi peminjaman buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name);
     }
+
+    public function return(Request $request, Circulation $circulation) {
+        // if circulation status is finished, return error
+        if ($circulation->status != 'Berjalan') {
+            return redirect()->route('sirkulasi')->with('danger', 'Status peminjaman tidak dapat diperpanjang karena sudah dikembalikan pada tanggal ' . $circulation->return_date);
+        }
+        
+        // get fine data
+        $currentFineSum = $circulation->fine_sum;
+        $fineData = Setting::where('key', 'fine')->first();
+
+        // set fine
+        $diff = date_diff(date_create(date('Y-m-d')), date_create($circulation->return_date));
+        if($diff->format('%R%a') < 0) {
+            $totalFine = abs($diff->format('%R%a') * $fineData->value);
+        } else {
+            $totalFine = 0;
+        }
+
+        // return
+        Circulation::where('id', $circulation->id)
+            ->update([
+                'fine_sum' => $currentFineSum + $totalFine,
+                'return_date' => date('Y-m-d'),
+                'status' => 'Selesai'
+            ]);
+
+        // redirect
+        return redirect()->route('sirkulasi')->with('success', 'Buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name . ' telah berhasil dikembalikan');
+    }
 }

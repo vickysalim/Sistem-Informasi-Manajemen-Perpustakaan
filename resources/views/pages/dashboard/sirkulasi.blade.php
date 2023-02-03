@@ -90,7 +90,12 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-sm">Kembalikan</a>
+                                <form method="POST" action="{{ route('sirkulasi.return', $item->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        Kembalikan
+                                    </button>
+                                </form>
                             </td>
                             <td>
                                 @php

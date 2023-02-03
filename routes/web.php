@@ -54,6 +54,10 @@ Route::post('/dashboard/sirkulasi/{circulation}/perpanjang',
     [DashboardCirculationController::class, 'extend']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.extend');
 
+Route::post('/dashboard/sirkulasi/{circulation}/kembalikan',
+    [DashboardCirculationController::class, 'return']
+)->middleware(['role:Admin, Petugas'])->name('sirkulasi.return');
+
 // Member
 
 Route::get('/dashboard/anggota', function () {
