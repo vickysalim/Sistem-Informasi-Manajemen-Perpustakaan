@@ -30,13 +30,15 @@ Route::get('/tentang', function () {
 |--------------------------------------------------------------------------
 */
 
-// Dashboard
-
 Route::get('/dashboard',
     [DashboardIndexController::class, 'index']
 )->middleware(['auth'])->name('dashboard');
 
-// Circulation
+/*
+|--------------------------------------------------------------------------
+| Circulation Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/sirkulasi',
     [DashboardCirculationController::class, 'index']
@@ -50,45 +52,75 @@ Route::post('/dashboard/sirkulasi/{circulation}/perpanjang',
     [DashboardCirculationController::class, 'extend']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.extend');
 
-Route::post('/dashboard/sirkulasi/{circulation}/perpanjang',
-    [DashboardCirculationController::class, 'extend']
-)->middleware(['role:Admin, Petugas'])->name('sirkulasi.extend');
-
 Route::post('/dashboard/sirkulasi/{circulation}/kembalikan',
     [DashboardCirculationController::class, 'return']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.return');
 
-// Member
+// 404
+
+Route::get('/dashboard/sirkulasi/{circulation}/perpanjang', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
+Route::get('/dashboard/sirkulasi/{circulation}/kembalikan', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
+/*
+|--------------------------------------------------------------------------
+| Member Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/anggota', function () {
     return view('pages.dashboard.anggota');
 })->middleware(['auth'])->name('anggota');
 
-// Book
+/*
+|--------------------------------------------------------------------------
+| Book Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/buku', function () {
     return view('pages.dashboard.buku');
 })->middleware(['auth'])->name('buku');
 
-// Transaction Report
+/*
+|--------------------------------------------------------------------------
+| Transaction Report Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/laporan/transaksi', function () {
     return view('pages.dashboard.laporan.transaksi');
 })->middleware(['auth'])->name('laporan.transaksi');
 
-// Member Report
+/*
+|--------------------------------------------------------------------------
+| Member Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/laporan/anggota', function () {
     return view('pages.dashboard.laporan.anggota');
 })->middleware(['auth'])->name('laporan.anggota');
 
-// Visitor Report
+/*
+|--------------------------------------------------------------------------
+| Visitor Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/dashboard/laporan/pengunjung', function () {
     return view('pages.dashboard.laporan.pengunjung');
 })->middleware(['auth'])->name('laporan.pengunjung');
 
-// Profile
+/*
+|--------------------------------------------------------------------------
+| Profile Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
