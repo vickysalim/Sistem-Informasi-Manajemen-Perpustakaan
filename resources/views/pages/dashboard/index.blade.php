@@ -14,7 +14,7 @@
                 <div class="icon">
                     <i class="fa fa-user"></i>
                 </div>
-                <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('anggota') }}" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
@@ -26,7 +26,7 @@
                 <div class="icon">
                     <i class="fa fa-book"></i>
                 </div>
-                <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('buku') }}" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
@@ -38,7 +38,7 @@
                 <div class="icon">
                     <i class="fa fa-people-arrows"></i>
                 </div>
-                <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('sirkulasi') }}" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
@@ -50,7 +50,7 @@
                 <div class="icon">
                     <i class="fa fa-undo"></i>
                 </div>
-                <a href="#" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('laporan.transaksi') }}" class="small-box-footer">Info selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

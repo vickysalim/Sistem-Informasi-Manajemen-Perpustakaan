@@ -74,7 +74,7 @@
                             </td>
                             <td>
                                 {{ date('d M Y', strtotime($item->loan_date)) }}<br>
-                                @if ($item->loan_date != $item->latest_extend_date)
+                                @if ($item->extend_count > 0)
                                     <span class="text-sm">Perpanjangan ke-{{ $item->extend_count }} pada {{ date('d M Y', strtotime($item->latest_extend_date)) }}</span>
                                 @endif
                             </td>
