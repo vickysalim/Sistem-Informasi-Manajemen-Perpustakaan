@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Dashboard\IndexController as DashboardIndexController;
 use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculationController;
+use App\Http\Controllers\Dashboard\MemberController as DashboardMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,9 +73,9 @@ Route::get('/dashboard/sirkulasi/{circulation}/kembalikan', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard/anggota', function () {
-    return view('pages.dashboard.anggota');
-})->middleware(['auth'])->name('anggota');
+Route::get('/dashboard/anggota',
+    [DashboardMemberController::class, 'index']
+)->middleware(['role:Admin, Petugas'])->name('anggota');
 
 /*
 |--------------------------------------------------------------------------
@@ -98,7 +99,7 @@ Route::get('/dashboard/laporan/transaksi', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Member Routes
+| Member Report Routes
 |--------------------------------------------------------------------------
 */
 
@@ -108,7 +109,7 @@ Route::get('/dashboard/laporan/anggota', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Visitor Routes
+| Visitor Report Routes
 |--------------------------------------------------------------------------
 */
 
