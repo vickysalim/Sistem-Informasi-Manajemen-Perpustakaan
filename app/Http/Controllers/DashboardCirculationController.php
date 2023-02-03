@@ -42,6 +42,7 @@ class DashboardCirculationController extends Controller
         $circulation->member_id = $validate['idAnggota'];
         $circulation->book_id = $validate['idBuku'];
         $circulation->loan_date = date('Y-m-d');
+        $circulation->latest_extend_date = date('Y-m-d');
         $circulation->return_date = $returnDate;
         
         // save
@@ -77,5 +78,9 @@ class DashboardCirculationController extends Controller
 
         // redirect
         return redirect()->route('sirkulasi')->with('success', 'Berhasil menambah durasi peminjaman buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name);
+    }
+
+    public function return(Request $request, Circulation $circulation) {
+
     }
 }
