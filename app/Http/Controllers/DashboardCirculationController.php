@@ -54,6 +54,11 @@ class DashboardCirculationController extends Controller
     }
 
     public function extend(Request $request, Circulation $circulation) {
+        // if circulation status is finished, return error
+        if ($circulation->status != 'Berjalan') {
+            return redirect()->route('sirkulasi')->with('danger', 'Status peminjaman tidak dapat diperpanjang karena sudah dikembalikan pada tanggal ' . $circulation->return_date);
+        }
+
         // get extend limit data
         $currentExtendCount = $circulation->extend_count;
         $extendLimitData = Setting::where('key', 'extend_limit')->first();
@@ -103,9 +108,5 @@ class DashboardCirculationController extends Controller
 
         // redirect
         return redirect()->route('sirkulasi')->with('success', 'Berhasil menambah durasi peminjaman buku ' . $circulation->Book->name . ' oleh ' . $circulation->Member->name);
-    }
-
-    public function return(Request $request, Circulation $circulation) {
-
     }
 }
