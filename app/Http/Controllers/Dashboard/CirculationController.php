@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Circulation;
 use App\Models\Setting;
 
-class DashboardCirculationController extends Controller
+class CirculationController extends Controller
 {
     public function index() {
         $fineData = Setting::where('key', 'fine')->first();

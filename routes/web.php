@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\DashboardIndexController;
-use App\Http\Controllers\DashboardCirculationController;
+use App\Http\Controllers\Dashboard\IndexController as DashboardIndexController;
+use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculationController;
 
 /*
 |--------------------------------------------------------------------------

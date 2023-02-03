@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Member;
 use App\Models\Book;
 use App\Models\Circulation;
 
-class DashboardIndexController extends Controller
+class IndexController extends Controller
 {
     public function index() {
         $memberCount = DB::table('members')->count();
