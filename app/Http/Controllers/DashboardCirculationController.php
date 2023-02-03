@@ -12,8 +12,9 @@ class DashboardCirculationController extends Controller
 {
     public function index() {
         $fineData = Setting::where('key', 'fine')->first();
+        $extendLimitData = Setting::where('key', 'extend_limit')->first();
         $circulationData = Circulation::all()->where('status', 'Berjalan');
-        return view('pages.dashboard.sirkulasi', compact('fineData', 'circulationData'));
+        return view('pages.dashboard.sirkulasi', compact('fineData', 'extendLimitData', 'circulationData'));
     }
 
     public function store(Request $request) {

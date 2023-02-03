@@ -47,10 +47,8 @@
             <table class="table dt-responsive nowrap mt-2 dataTable no-footer dtr-inline collapsed" id="table">
                 <thead>
                     <tr>
-                        <th>Kode Buku</th>
-                        <th>Judul Buku</th>
-                        <th>Nomor Anggota</th>
-                        <th>Nama Anggota</th>
+                        <th>Buku</th>
+                        <th>Anggota</th>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Kembali</th>
                         <th>Perpanjang</th>
@@ -59,21 +57,37 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $extendLimit = $extendLimitData->value;
+                    @endphp
                     @foreach ($circulationData as $item)
                         <tr>
-                            <td>{{ $item->book_id }}</td>
-                            <td>{{ $item->Book->name ?? 'N/A' }}</td>
-                            <td>{{ $item->member_id }}</td>
-                            <td>{{ $item->Member->name ?? 'N/A' }}</td>
-                            <td>{{ $item->loan_date }}</td>
-                            <td>{{ $item->return_date }}</td>
                             <td>
-                                <form method="POST" action="{{ route('sirkulasi.extend', $item->id) }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        Perpanjang
-                                    </button>
-                                </form>
+                                ID: {{ $item->book_id }}<br>
+                                <span class="text-sm">{{ $item->Book->name ?? 'N/A' }}</span>
+                            </td>
+                            <td>
+                                ID: {{ $item->member_id }}<br>
+                                <span class="text-sm">{{ $item->Member->name ?? 'N/A' }}</span>
+                            </td>
+                            <td>
+                                {{ date('d M Y', strtotime($item->loan_date)) }}<br>
+                                @if ($item->loan_date != $item->latest_extend_date)
+                                    <span class="text-sm">Perpanjangan ke-{{ $item->extend_count }} pada {{ date('d M Y', strtotime($item->latest_extend_date)) }}</span>
+                                @endif
+                            </td>
+                            <td>{{ date('d M Y', strtotime($item->return_date)) }}</td>
+                            <td>
+                                @if ($item->extend_count >= $extendLimit)
+                                    <span class="text-sm">Sudah melewati batas</span>
+                                @else
+                                    <form method="POST" action="{{ route('sirkulasi.extend', $item->id) }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Perpanjang
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm">Kembalikan</a>
@@ -81,13 +95,13 @@
                             <td>
                                 @php
                                     $diff = date_diff(date_create(date('Y-m-d')), date_create($item->return_date));
-
-                                    if($diff->format('%R%a') < 0) {
-                                        echo 'Rp. ' . abs($diff->format('%R%a') * $fineData->value);
-                                    } else {
-                                        echo 'Rp. 0';
-                                    }
                                 @endphp
+
+                                @if($diff->format('%R%a') < 0)
+                                    Rp. {{ abs($diff->format('%R%a') * $fineData->value) }}
+                                @else
+                                    Rp. 0
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -101,7 +115,9 @@
 <script>
     $(function () {
       $('#table').DataTable({
-        "responsive": true,
+        "responsive": false,
+        "scrollX": true,
+        "autoWidth": false,
         "language": {
             "lengthMenu": "Menampilkan _MENU_ data peminjaman per halaman",
             "emptyTable": "<div style='margin: 16px;'>Belum ada data peminjaman</div>",
