@@ -81,6 +81,16 @@ Route::post('/dashboard/anggota',
     [DashboardMemberController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('anggota.store');
 
+Route::post('/dashboard/anggota/{member}/ubah-status',
+    [DashboardMemberController::class, 'switchStatus']
+)->middleware(['role:Admin, Petugas'])->name('anggota.switch');
+
+// 404
+
+Route::get('/dashboard/anggota/{member}/ubah-status', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
 /*
 |--------------------------------------------------------------------------
 | Book Routes

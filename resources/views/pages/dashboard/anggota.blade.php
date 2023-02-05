@@ -84,6 +84,14 @@
                             <td>{{ $item->name }}</td>
                             <td>
                                 <div class="badge badge-{{ $item->status == "Aktif" ? "success" : "danger"}}">{{ $item->status }}</div>
+                                <div>
+                                    <form method="POST" action="{{ route('anggota.switch', $item->id) }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-warning btn-sm">
+                                            Ubah Status
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm">Edit</button>

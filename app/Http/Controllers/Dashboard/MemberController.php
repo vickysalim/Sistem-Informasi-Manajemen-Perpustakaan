@@ -43,4 +43,24 @@ class MemberController extends Controller
         // redirect
         return redirect()->route('anggota')->with('success', 'Berhasil menambahkan data anggota');
     }
+
+    public function switchStatus(Request $request, Member $member) {
+        // check status
+        if($member->status == 'Aktif') {
+            $newStatus = 'Non-Aktif';
+        } else if($member->status == 'Non-Aktif') {
+            $newStatus = 'Aktif';
+        } else {
+            return redirect()->route('anggota')->with('danger', 'Gagal mengubah status anggota ' . $member->name . ' (ID: ' . $member->id .')');
+        }
+
+        // switch status
+        Member::where('id', $member->id)
+            ->update([
+                'status' => $newStatus
+            ]);
+
+        // redirect
+        return redirect()->route('anggota')->with('success', 'Berhasil mengubah status anggota ' . $member->name . ' (ID: ' . $member->id .') menjadi ' . $newStatus);
+    }
 }
