@@ -81,9 +81,13 @@ Route::post('/dashboard/anggota',
     [DashboardMemberController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('anggota.store');
 
-Route::post('/dashboard/anggota/{member}/ubah-status',
+Route::patch('/dashboard/anggota/{member}/ubah-status',
     [DashboardMemberController::class, 'switchStatus']
 )->middleware(['role:Admin, Petugas'])->name('anggota.switch');
+
+Route::put('/dashboard/anggota/{member}/edit',
+    [DashboardMemberController::class, 'update']
+)->middleware(['role:Admin, Petugas'])->name('anggota.update');
 
 // 404
 

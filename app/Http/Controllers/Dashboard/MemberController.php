@@ -15,14 +15,14 @@ class MemberController extends Controller
     }
     
     public function store(Request $request) {
-        // validate idBuku, name, status
+        // validate
         $validate = $request->validate([
             'idAnggota' => 'required',
             'nama' => 'required',
             'status' => 'required'
         ]);
 
-        // check if idAnggota is already exist
+        // check if id is already exist
         if(Member::where('id', $validate['idAnggota'])->exists()) {
             return redirect()->route('anggota')->with('danger', 'ID anggota sudah ada');
         }
@@ -62,5 +62,32 @@ class MemberController extends Controller
 
         // redirect
         return redirect()->route('anggota')->with('success', 'Berhasil mengubah status anggota ' . $member->name . ' (ID: ' . $member->id .') menjadi ' . $newStatus);
+    }
+
+    public function update(Request $request, Member $member) {
+        // validate
+        $validate = $request->validate([
+            'idAnggota' => 'required',
+            'nama' => 'required'
+        ]);
+
+        // check if id is already exist
+        if(Member::where('id', $validate['idAnggota'])->exists()) {
+            return redirect()->route('anggota')->with('danger', 'ID anggota sudah ada');
+        }
+        
+        try {
+            // update
+            Member::where('id', $member->id)
+                ->update([
+                    'id' => $validate['idAnggota'],
+                    'name' => $validate['nama']
+                ]);
+        } catch (\Exception $e) {
+            return redirect()->route('anggota')->with('danger', 'Gagal mengubah data anggota ' . $member->name . ' (ID: ' . $member->id .')');
+        }
+
+        // redirect
+        return redirect()->route('anggota')->with('success', 'Berhasil mengubah data anggota ' . $member->name . ' (ID: ' . $member->id .')');
     }
 }

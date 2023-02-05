@@ -86,6 +86,7 @@
                                 <div class="badge badge-{{ $item->status == "Aktif" ? "success" : "danger"}}">{{ $item->status }}</div>
                                 <div>
                                     <form method="POST" action="{{ route('anggota.switch', $item->id) }}">
+                                        @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-warning btn-sm">
                                             Ubah Status
@@ -94,8 +95,8 @@
                                 </div>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                <button type="button" class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#editModal">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data anggota {{ $item->name }} (ID: {{ $item->id }})? Tindakan ini tidak dapat dibatalkan.')">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
@@ -103,32 +104,84 @@
             </table>
         </div>
     </div>
+
+    <!-- Edit Data Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Edit Data Anggota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('login') }}" method="POST" method="POST" id="modalForm">
+                    <div class="modal-body">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group">
+                            <label for="editId">ID Anggota</label>
+                            <input type="number" name="idAnggota" class="form-control" id="editId" placeholder="ID Anggota" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editName">Nama</label>
+                            <input type="text" name="nama" class="form-control" id="editName" placeholder="Nama Anggota" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
-<script>
-    $(function () {
-      $('#table').DataTable({
-        "responsive": false,
-        "scrollX": true,
-        "autoWidth": false,
-        "order": [[2, "asc"]],
-        "language": {
-            "lengthMenu": "Menampilkan _MENU_ data anggota per halaman",
-            "emptyTable": "<div style='margin: 16px;'>Belum ada data anggota</div>",
-            "zeroRecords": "<div style='margin: 16px;'>Data anggota tidak ditemukan</div>",
-            "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            "infoEmpty": "Data anggota tidak ditemukan",
-            "infoFiltered": "(berdasarkan filter _MAX_ data anggota tersedia)",
-            "paginate": {
-                "first":      "Awal",
-                "last":       "Akhir",
-                "next":       "Selanjutnya",
-                "previous":   "Sebelumnya"
-            },
-            "search": "Cari:"
-        }
-      });
-    });
-  </script>
+    <script>
+        $(function () {
+            $('#table').DataTable({
+                "responsive": false,
+                "scrollX": true,
+                "autoWidth": false,
+                "order": [[2, "asc"]],
+                "language": {
+                    "lengthMenu": "Menampilkan _MENU_ data anggota per halaman",
+                    "emptyTable": "<div style='margin: 16px;'>Belum ada data anggota</div>",
+                    "zeroRecords": "<div style='margin: 16px;'>Data anggota tidak ditemukan</div>",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Data anggota tidak ditemukan",
+                    "infoFiltered": "(berdasarkan filter _MAX_ data anggota tersedia)",
+                    "paginate": {
+                        "first":      "Awal",
+                        "last":       "Akhir",
+                        "next":       "Selanjutnya",
+                        "previous":   "Sebelumnya"
+                    },
+                    "search": "Cari:"
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $('table').on('click', 'button.edit-button',function (ele) {
+                var tr = ele.target.parentNode.parentNode;
+
+                var id = tr.cells[0].textContent;
+                var name = tr.cells[1].textContent;
+
+                $('#editId').val(id);
+                $('#editName').val(name);
+
+                // submit url from route
+                var url = "{{ route('anggota.update', ':id') }}";
+                url = url.replace(':id', id);
+
+                console.log(url);
+                $("form#modalForm").attr('action', url);
+            });
+        });
+    </script>
 @endsection
