@@ -40,16 +40,20 @@ class CirculationController extends Controller
             'idBuku' => 'required'
         ]);
 
-        // store
-        $circulation = new Circulation();
-        $circulation->member_id = $validate['idAnggota'];
-        $circulation->book_id = $validate['idBuku'];
-        $circulation->loan_date = date('Y-m-d');
-        $circulation->latest_extend_date = date('Y-m-d');
-        $circulation->return_date = $returnDate;
-        
-        // save
-        $circulation->save();
+        try {
+            // store
+            $circulation = new Circulation();
+            $circulation->member_id = $validate['idAnggota'];
+            $circulation->book_id = $validate['idBuku'];
+            $circulation->loan_date = date('Y-m-d');
+            $circulation->latest_extend_date = date('Y-m-d');
+            $circulation->return_date = $returnDate;
+            
+            // save
+            $circulation->save();
+        } catch (\Exception $e) {
+            return redirect()->route('sirkulasi')->with('danger', 'Gagal menambahkan data sirkulasi');
+        }
 
         // redirect
         return redirect()->route('sirkulasi')->with('success', 'Berhasil menambahkan data sirkulasi');
