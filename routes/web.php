@@ -95,6 +95,10 @@ Route::get('/dashboard/anggota/{member}/ubah-status', function () {
     return abort(404);
 })->middleware(['role:Admin, Petugas']);
 
+Route::get('/dashboard/anggota/{member}/edit', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
 /*
 |--------------------------------------------------------------------------
 | Book Routes
