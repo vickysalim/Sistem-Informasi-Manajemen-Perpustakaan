@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Circulation;
 use App\Models\Setting;
+use App\Models\Member;
+use App\Models\Book;
 
 class CirculationController extends Controller
 {
@@ -20,6 +22,22 @@ class CirculationController extends Controller
     }
 
     public function store(Request $request) {
+        // validate
+        $validate = $request->validate([
+            'idAnggota' => 'required',
+            'idBuku' => 'required'
+        ]);
+        
+        // if member id is not exist in database then return error
+        if (!Member::where('id', $validate['idAnggota'])->exists()) {
+            return redirect()->route('sirkulasi')->with('danger', 'ID anggota ' . $validate['idAnggota'] . ' tidak ditemukan');
+        }
+
+        // if book id is not exist in database then return error
+        if (!Book::where('id', $validate['idBuku'])->exists()) {
+            return redirect()->route('sirkulasi')->with('danger', 'ID buku ' . $validate['idBuku'] . ' tidak ditemukan');
+        }
+
         // get loan duration data
         $loanDurationData = Setting::where('key', 'loan_duration')->first();
         $addDurationFormat = '+' . $loanDurationData->value . 'days';
@@ -33,12 +51,6 @@ class CirculationController extends Controller
         
         // set return date
         $returnDate = date('Y-m-d', strtotime($addDurationFormat));
-
-        // validate
-        $validate = $request->validate([
-            'idAnggota' => 'required',
-            'idBuku' => 'required'
-        ]);
 
         try {
             // store
