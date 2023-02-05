@@ -28,10 +28,16 @@
                 <div class="form-group">
                     <label for="idAnggota">ID Anggota</label>
                     <input type="number" class="form-control" id="idAnggota" name="idAnggota" placeholder="Masukkan ID Anggota">
+                    @error('idAnggota')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="idBuku">ID Buku</label>
                     <input type="number" class="form-control" id="idBuku" name="idBuku" placeholder="Masukkan ID Buku">
+                    @error('idBuku')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
