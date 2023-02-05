@@ -49,11 +49,11 @@ Route::post('/dashboard/sirkulasi',
     [DashboardCirculationController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.store');
 
-Route::post('/dashboard/sirkulasi/{circulation}/perpanjang',
+Route::patch('/dashboard/sirkulasi/{circulation}/perpanjang',
     [DashboardCirculationController::class, 'extend']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.extend');
 
-Route::post('/dashboard/sirkulasi/{circulation}/kembalikan',
+Route::patch('/dashboard/sirkulasi/{circulation}/kembalikan',
     [DashboardCirculationController::class, 'return']
 )->middleware(['role:Admin, Petugas'])->name('sirkulasi.return');
 

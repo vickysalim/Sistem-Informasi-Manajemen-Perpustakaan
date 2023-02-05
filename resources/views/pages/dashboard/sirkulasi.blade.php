@@ -90,6 +90,7 @@
                                     <span class="text-sm">Sudah melewati batas</span>
                                 @else
                                     <form method="POST" action="{{ route('sirkulasi.extend', $item->id) }}">
+                                        @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             Perpanjang
@@ -99,6 +100,7 @@
                             </td>
                             <td>
                                 <form method="POST" action="{{ route('sirkulasi.return', $item->id) }}">
+                                    @method('PATCH')
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-sm">
                                         Kembalikan
