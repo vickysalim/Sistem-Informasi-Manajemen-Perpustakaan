@@ -38,6 +38,11 @@ class CirculationController extends Controller
             return redirect()->route('sirkulasi')->with('danger', 'ID buku ' . $validate['idBuku'] . ' tidak ditemukan');
         }
 
+        // if member status is inactive then return error
+        if (Member::where('id', $validate['idAnggota'])->first()->status == 'Non-Aktif') {
+            return redirect()->route('sirkulasi')->with('danger', 'Anggota dengan ID ' . $validate['idAnggota'] . ' tidak dapat meminjam buku karena statusnya non-aktif');
+        }
+
         // get loan duration data
         $loanDurationData = Setting::where('key', 'loan_duration')->first();
         $addDurationFormat = '+' . $loanDurationData->value . 'days';
