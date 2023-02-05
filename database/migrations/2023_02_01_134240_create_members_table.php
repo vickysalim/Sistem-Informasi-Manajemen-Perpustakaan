@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->unsigned();
             $table->string('name');
             $table->enum('status', ['Aktif', 'Non-Aktif'])->default('Aktif');
             $table->timestamps();
