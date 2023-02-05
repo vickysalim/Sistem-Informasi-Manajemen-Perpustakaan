@@ -71,8 +71,8 @@ class MemberController extends Controller
             'nama' => 'required'
         ]);
 
-        // check if id is already exist
-        if(Member::where('id', $validate['idAnggota'])->exists()) {
+        // check if id is already exist & check if id is not the same
+        if(Member::where('id', $validate['idAnggota'])->exists() && $validate['idAnggota'] != $member->id) {
             return redirect()->route('anggota')->with('danger', 'ID anggota sudah ada');
         }
         
