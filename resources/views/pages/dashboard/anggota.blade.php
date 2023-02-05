@@ -7,7 +7,9 @@
     @if (session()->has('danger'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h6 class="mb-0"><i class="icon fas fa-ban"></i> {{ session()->get('danger') }}</h6>
+            <h6 class="mb-0"><i class="icon fas fa-ban"></i> 
+                {{ session()->get('danger') }}
+            </h6>
         </div>
     @endif
     @if (session()->has('success'))
@@ -22,26 +24,36 @@
         <div class="card-header">
             <h3 class="card-title">Tambah Anggota Baru</h3>
         </div>
-        <form>
+        <form action="{{ route('anggota.store') }}" method="POST">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="idAnggota">ID Anggota</label>
-                    <input type="number" class="form-control" id="idAnggota" placeholder="Masukkan ID Anggota">
+                    <input type="number" class="form-control" id="idAnggota" name="idAnggota" placeholder="Masukkan ID Anggota" required>
+                    @error('idAnggota')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
-                    <label for="idBuku">Nama</label>
-                    <input type="text" class="form-control" id="idBuku" placeholder="Masukkan Nama">
+                    <label for="nama">Nama</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" required>
+                    @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="radioAktif">Status</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="radioAktif" name="status">
+                        <input class="custom-control-input" type="radio" id="radioAktif" name="status" value="Aktif" required>
                         <label for="radioAktif" class="custom-control-label font-weight-normal">Aktif</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="radioNonaktif" name="status">
+                        <input class="custom-control-input" type="radio" id="radioNonaktif" name="status" value="Non-Aktif">
                         <label for="radioNonaktif" class="custom-control-label font-weight-normal">Non-Aktif</label>
                     </div>
+                    @error('status')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

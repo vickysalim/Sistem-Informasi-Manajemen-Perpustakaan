@@ -77,6 +77,10 @@ Route::get('/dashboard/anggota',
     [DashboardMemberController::class, 'index']
 )->middleware(['role:Admin, Petugas'])->name('anggota');
 
+Route::post('/dashboard/anggota',
+    [DashboardMemberController::class, 'store']
+)->middleware(['role:Admin, Petugas'])->name('anggota.store');
+
 /*
 |--------------------------------------------------------------------------
 | Book Routes
