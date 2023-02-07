@@ -118,6 +118,10 @@ Route::get('/dashboard/buku',
     [DashboardBookController::class, 'index']
 )->middleware(['role:Admin, Petugas'])->name('buku');
 
+Route::post('/dashboard/buku',
+    [DashboardBookController::class, 'store']
+)->middleware(['role:Admin, Petugas'])->name('buku.store');
+
 /*
 |--------------------------------------------------------------------------
 | Transaction Report Routes

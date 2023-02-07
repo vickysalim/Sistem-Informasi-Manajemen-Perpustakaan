@@ -24,46 +24,67 @@
         <div class="card-header">
             <h3 class="card-title">Tambah Buku Baru</h3>
         </div>
-        <form>
+        <form action="{{ route('buku.store') }}" method="POST">
+            @csrf
             <div class="card-body">
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h6 class="mb-0"><i class="icon fas fa-ban"></i> Error! Data yang Anda masukkan tidak valid</h6>
-                </div>
                 <div class="form-group">
                     <label for="idBuku">ID Buku</label>
-                    <input type="number" class="form-control" id="idBuku" placeholder="Masukkan ID Buku">
+                    <input type="number" class="form-control" id="idBuku" name="idBuku" placeholder="Masukkan ID Buku" required>
+                    @error('idBuku')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="judul">Judul</label>
-                    <input type="text" class="form-control" id="judul" placeholder="Masukkan Judul">
+                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan Judul" required>
+                    @error('judul')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="pengarang">Pengarang</label>
-                    <input type="text" class="form-control" id="pengarang" placeholder="Masukkan Pengarang">
+                    <input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Masukkan Pengarang" required>
+                    @error('pengarang')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="penerbit">Penerbit</label>
-                    <input type="text" class="form-control" id="penerbit" placeholder="Masukkan Penerbit">
+                    <input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Masukkan Penerbit" required>
+                    @error('penerbit')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="tahun">Tahun</label>
-                    <input type="number" class="form-control" id="tahun" placeholder="Masukkan Tahun">
+                    <input type="number" class="form-control" id="tahun" name="tahun" placeholder="Masukkan Tahun">
+                    @error('tahun')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="isbn">ISBN</label>
-                    <input type="number" class="form-control" id="isbn" placeholder="Masukkan ISBN">
+                    <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Masukkan ISBN">
+                    @error('isbn')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="jenis">Jenis</label>
-                    <input type="text" class="form-control" id="jenis" placeholder="Masukkan Jenis">
+                    <input type="text" class="form-control" id="jenis" name="jenis" placeholder="Masukkan Jenis">
+                    @error('jenis')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="cover">Cover Buku</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="cover">
+                        <input type="file" class="custom-file-input" id="cover" name="cover">
                         <label class="custom-file-label" for="cover">Upload foto cover buku (.jpg atau .png)</label>
                     </div>
+                    @error('cover')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
