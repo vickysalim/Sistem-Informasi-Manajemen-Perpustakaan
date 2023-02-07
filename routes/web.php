@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\IndexController as DashboardIndexController;
 use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculationController;
 use App\Http\Controllers\Dashboard\MemberController as DashboardMemberController;
+use App\Http\Controllers\Dashboard\BookController as DashboardBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,9 +114,9 @@ Route::get('/dashboard/anggota/{member}/hapus', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard/buku', function () {
-    return view('pages.dashboard.buku');
-})->middleware(['auth'])->name('buku');
+Route::get('/dashboard/buku',
+    [DashboardBookController::class, 'index']
+)->middleware(['role:Admin, Petugas'])->name('buku');
 
 /*
 |--------------------------------------------------------------------------
