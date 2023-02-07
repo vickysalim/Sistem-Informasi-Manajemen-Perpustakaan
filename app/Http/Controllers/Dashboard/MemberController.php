@@ -90,4 +90,16 @@ class MemberController extends Controller
         // redirect
         return redirect()->route('anggota')->with('success', 'Berhasil mengubah data anggota ' . $member->name . ' (ID: ' . $member->id .')');
     }
+
+    public function destroy(Request $request, Member $member) {
+        try {
+            // delete
+            Member::where('id', $member->id)->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('anggota')->with('danger', 'Gagal menghapus data anggota ' . $member->name . ' (ID: ' . $member->id .')');
+        }
+
+        // redirect
+        return redirect()->route('anggota')->with('success', 'Berhasil menghapus data anggota ' . $member->name . ' (ID: ' . $member->id .')');
+    }
 }

@@ -96,7 +96,11 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#editModal">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data anggota {{ $item->name }} (ID: {{ $item->id }})? Tindakan ini tidak dapat dibatalkan.')">Hapus</button>
+                                <form method="POST" action="{{ route('anggota.destroy', $item->id) }}" class="d-inline">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

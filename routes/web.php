@@ -89,6 +89,10 @@ Route::put('/dashboard/anggota/{member}/edit',
     [DashboardMemberController::class, 'update']
 )->middleware(['role:Admin, Petugas'])->name('anggota.update');
 
+Route::delete('/dashboard/anggota/{member}/hapus',
+    [DashboardMemberController::class, 'destroy']
+)->middleware(['role:Admin, Petugas'])->name('anggota.destroy');
+
 // 404
 
 Route::get('/dashboard/anggota/{member}/ubah-status', function () {
