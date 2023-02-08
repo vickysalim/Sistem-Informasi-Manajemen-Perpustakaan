@@ -126,6 +126,10 @@ Route::put('/dashboard/buku/{book}/edit',
     [DashboardBookController::class, 'update']
 )->middleware(['role:Admin, Petugas'])->name('buku.update');
 
+Route::delete('/dashboard/buku/{book}/hapus',
+    [DashboardBookController::class, 'destroy']
+)->middleware(['role:Admin, Petugas'])->name('buku.destroy');
+
 /*
 |--------------------------------------------------------------------------
 | Transaction Report Routes

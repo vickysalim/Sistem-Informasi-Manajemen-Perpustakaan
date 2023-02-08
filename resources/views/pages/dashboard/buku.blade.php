@@ -125,7 +125,11 @@
                             <td>
                                 <div class="d-block">
                                     <button type="button" class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#editModal">Edit</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                    <form action="{{ route('buku.destroy', $item->id) }}" method="POST" class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
                                 </div>
                                 @if(!$item->cover_url)
                                     <div class="badge badge-warning">
