@@ -81,28 +81,31 @@ class BookController extends Controller
         try {
             // get current cover url
             $getCurrentCoverUrl = Book::where('id', $book->id)->first()->cover_url;
-            $getCurrentCoverUrlExtension = explode('.', $getCurrentCoverUrl)[1];
-
+            
             // upload cover
             if($request->hasFile('updateCover')) {
                 $coverFileName = $validate['idBuku'] . '.' . $validate['updateCover']->getClientOriginalExtension();
                 $validate['updateCover']->storeAs('public/cover', $coverFileName);
-
+                
                 Book::where('id', $book->id)
-                    ->update([
-                        'cover_url' => $coverFileName
-                    ]);
+                ->update([
+                    'cover_url' => $coverFileName
+                ]);
             } else {
-                $coverFileName = $validate['idBuku'] . '.' . $getCurrentCoverUrlExtension;
-                $coverFile = storage_path('app/public/cover/' . $getCurrentCoverUrl);
-                $newCoverFile = storage_path('app/public/cover/' . $coverFileName);
+                if($getCurrentCoverUrl != "") {
+                    $getCurrentCoverUrlExtension = explode('.', $getCurrentCoverUrl)[1];
 
-                rename($coverFile, $newCoverFile);
-
-                Book::where('id', $book->id)
-                    ->update([
-                        'cover_url' => $coverFileName
-                    ]);
+                    $coverFileName = $validate['idBuku'] . '.' . $getCurrentCoverUrlExtension;
+                    $coverFile = storage_path('app/public/cover/' . $getCurrentCoverUrl);
+                    $newCoverFile = storage_path('app/public/cover/' . $coverFileName);
+    
+                    rename($coverFile, $newCoverFile);
+    
+                    Book::where('id', $book->id)
+                        ->update([
+                            'cover_url' => $coverFileName
+                        ]);
+                }
             }
 
             // update
