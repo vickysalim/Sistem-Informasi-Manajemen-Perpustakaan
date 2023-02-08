@@ -24,7 +24,7 @@
         <div class="card-header">
             <h3 class="card-title">Tambah Buku Baru</h3>
         </div>
-        <form action="{{ route('buku.store') }}" method="POST">
+        <form action="{{ route('buku.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">
@@ -79,8 +79,8 @@
                 <div class="form-group">
                     <label for="cover">Cover Buku</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="cover" name="cover">
-                        <label class="custom-file-label" for="cover">Upload foto cover buku (.jpg atau .png)</label>
+                        <input type="file" class="custom-file-input" id="cover" name="cover" accept="image/*">
+                        <label class="custom-file-label" for="cover" id="cover-label">Upload foto cover buku (.jpg atau .png)</label>
                     </div>
                     @error('cover')
                         <div class="text-danger">{{ $message }}</div>
@@ -158,5 +158,10 @@
         }
       });
     });
+  </script>
+  <script>
+    $(document).on('change', '#cover', function (event) {
+        $(this).next('#cover-label').html("File: " + event.target.files[0].name);
+    })
   </script>
 @endsection

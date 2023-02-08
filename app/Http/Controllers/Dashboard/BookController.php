@@ -24,6 +24,7 @@ class BookController extends Controller
             'tahun' => 'required',
             'isbn' => 'required',
             'jenis' => 'required',
+            'cover' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         // check if id is already exist
@@ -41,15 +42,21 @@ class BookController extends Controller
             $book->year = $validate['tahun'];
             $book->isbn = $validate['isbn'];
             $book->type = $validate['jenis'];
-            $book->cover_url = "";
+
+            // upload cover
+            if($request->hasFile('cover')) {
+                $coverFileName = $validate['idBuku'] . '.' . $validate['cover']->getClientOriginalExtension();
+                $validate['cover']->storeAs('public/cover', $coverFileName);
+
+                $book->cover_url = $coverFileName;
+            }
 
             // save
             $book->save();
         } catch (\Exception $e) {
             return redirect()->route('buku')->with('danger', 'Gagal menambahkan data buku');
         }
-
-        // redirect
+        //redirect
         return redirect()->route('buku')->with('success', 'Berhasil menambahkan data buku');
     }
 }
