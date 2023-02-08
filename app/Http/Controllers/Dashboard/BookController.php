@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
+
 use App\Models\Book;
 
 class BookController extends Controller
@@ -125,5 +127,24 @@ class BookController extends Controller
 
         // redirect
         return redirect()->route('buku')->with('success', 'Berhasil mengubah data buku ' . $book->id . ' (ID: ' . $book->id . ')');
+    }
+
+    public function destroy(Request $request, Book $book) {
+        try {
+            // get cover file name
+            $coverFileName = Book::where('id', $book->id)->first()->cover_url;
+
+            if($coverFileName != "" & file_exists(storage_path('app\\public\\cover\\' . $coverFileName))) {
+                File::delete(storage_path('app\\public\\cover\\' . $coverFileName));
+            }
+
+            // delete
+            Book::where('id', $book->id)->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('buku')->with('danger', 'Gagal menghapus data buku ' . $book->name . ' (ID: ' . $book->id .')');
+        }
+
+        // redirect
+        return redirect()->route('buku')->with('success', 'Berhasil menghapus data buku ' . $book->name . ' (ID: ' . $book->id .')');
     }
 }
