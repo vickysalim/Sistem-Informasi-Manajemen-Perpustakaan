@@ -59,4 +59,68 @@ class BookController extends Controller
         //redirect
         return redirect()->route('buku')->with('success', 'Berhasil menambahkan data buku');
     }
+
+    public function update(Request $request, Book $book) {
+        // validate
+        $validate = $request->validate([
+            'idBuku' => 'required',
+            'judul' => 'required',
+            'pengarang' => 'required',
+            'penerbit' => 'required',
+            'tahun' => 'required',
+            'isbn' => 'required',
+            'jenis' => 'required',
+            'updateCover' => 'nullable|file|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        // check if id is already exist & check if id is not same
+        if(Book::where('id', $validate['idBuku'])->exists() && $validate['idBuku'] != $book->id) {
+            return redirect()->route('buku')->with('danger', 'ID buku sudah ada');
+        }
+
+        try {
+            // get current cover url
+            $getCurrentCoverUrl = Book::where('id', $book->id)->first()->cover_url;
+            $getCurrentCoverUrlExtension = explode('.', $getCurrentCoverUrl)[1];
+
+            // upload cover
+            if($request->hasFile('updateCover')) {
+                $coverFileName = $validate['idBuku'] . '.' . $validate['updateCover']->getClientOriginalExtension();
+                $validate['updateCover']->storeAs('public/cover', $coverFileName);
+
+                Book::where('id', $book->id)
+                    ->update([
+                        'cover_url' => $coverFileName
+                    ]);
+            } else {
+                $coverFileName = $validate['idBuku'] . '.' . $getCurrentCoverUrlExtension;
+                $coverFile = storage_path('app/public/cover/' . $getCurrentCoverUrl);
+                $newCoverFile = storage_path('app/public/cover/' . $coverFileName);
+
+                rename($coverFile, $newCoverFile);
+
+                Book::where('id', $book->id)
+                    ->update([
+                        'cover_url' => $coverFileName
+                    ]);
+            }
+
+            // update
+            Book::where('id', $book->id)
+                ->update([
+                    'id' => $validate['idBuku'],
+                    'name' => $validate['judul'],
+                    'author' => $validate['pengarang'],
+                    'publisher' => $validate['penerbit'],
+                    'year' => $validate['tahun'],
+                    'isbn' => $validate['isbn'],
+                    'type' => $validate['jenis']
+                ]);
+        } catch (\Exception $e) {
+            return redirect()->route('buku')->with('danger', 'Gagal mengubah data buku ' . $book->id . ' (ID: ' . $book->id . ')');
+        }
+
+        // redirect
+        return redirect()->route('buku')->with('success', 'Berhasil mengubah data buku ' . $book->id . ' (ID: ' . $book->id . ')');
+    }
 }

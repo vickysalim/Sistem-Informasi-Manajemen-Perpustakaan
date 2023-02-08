@@ -122,6 +122,10 @@ Route::post('/dashboard/buku',
     [DashboardBookController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('buku.store');
 
+Route::put('/dashboard/buku/{book}/edit',
+    [DashboardBookController::class, 'update']
+)->middleware(['role:Admin, Petugas'])->name('buku.update');
+
 /*
 |--------------------------------------------------------------------------
 | Transaction Report Routes
