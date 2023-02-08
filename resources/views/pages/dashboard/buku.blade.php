@@ -123,8 +123,17 @@
                             <td>{{ $item->isbn }}</td>
                             <td>{{ $item->type }}</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                <div class="d-block">
+                                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                </div>
+                                @if(!$item->cover_url)
+                                    <div class="badge badge-warning">
+                                        <i class="fas fa-exclamation-triangle"></i> Belum ada cover buku
+                                    </div>
+                                @else
+                                    <a class="btn btn-link btn-sm p-0" target="_blank" href="{{ asset('storage/cover/'.$item->cover_url) }}">Klik untuk akses cover</a>
+                                @endif
                             </td>
                         </tr>                        
                     @endforeach
