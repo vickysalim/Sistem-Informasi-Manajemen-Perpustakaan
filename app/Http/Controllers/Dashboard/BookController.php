@@ -84,6 +84,11 @@ class BookController extends Controller
             
             // upload cover
             if($request->hasFile('updateCover')) {
+                // delete old cover
+                if($getCurrentCoverUrl != "" & file_exists(storage_path('app\\public\\cover\\' . $getCurrentCoverUrl))) {
+                    File::delete(storage_path('app\\public\\cover\\' . $getCurrentCoverUrl));
+                }
+
                 $coverFileName = $validate['idBuku'] . '.' . $validate['updateCover']->getClientOriginalExtension();
                 $validate['updateCover']->storeAs('public/cover', $coverFileName);
                 
