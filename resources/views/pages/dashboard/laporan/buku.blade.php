@@ -24,11 +24,11 @@
         <div class="card-header">
             <h3 class="card-title">Cek Laporan Buku</h3>
         </div>
-        <form>
+        <form method="GET" action="{{ route('laporan.buku.pdf') }}">
             <div class="card-body">
                 <div class="form-group">
                     <label for="tanggalCetak">Tanggal Cetak</label>
-                    <input type="date" class="form-control" id="tanggalCetak">
+                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak">
                 </div>
             </div>
             <div class="card-footer">

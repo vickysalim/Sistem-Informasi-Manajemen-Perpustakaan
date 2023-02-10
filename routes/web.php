@@ -8,6 +8,8 @@ use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculation
 use App\Http\Controllers\Dashboard\MemberController as DashboardMemberController;
 use App\Http\Controllers\Dashboard\BookController as DashboardBookController;
 
+use App\Http\Controllers\Dashboard\Report\BookController as DashboardBookReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,9 +148,13 @@ Route::get('/dashboard/buku/{book}/hapus', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard/laporan/buku', function () {
-    return view('pages.dashboard.laporan.buku');
-})->middleware(['auth'])->name('laporan.buku');
+Route::get('/dashboard/laporan/buku',
+    [DashboardBookReportController::class, 'index']
+)->middleware(['role:Admin, Petugas'])->name('laporan.buku');
+
+Route::get('/dashboard/laporan/buku/cetak',
+    [DashboardBookReportController::class, 'getReport']
+)->middleware(['role:Admin, Petugas'])->name('laporan.buku.pdf');
 
 /*
 |--------------------------------------------------------------------------
