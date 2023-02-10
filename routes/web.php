@@ -142,6 +142,16 @@ Route::get('/dashboard/buku/{book}/hapus', function () {
 
 /*
 |--------------------------------------------------------------------------
+| Book Report Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/dashboard/laporan/buku', function () {
+    return view('pages.dashboard.laporan.buku');
+})->middleware(['auth'])->name('laporan.buku');
+
+/*
+|--------------------------------------------------------------------------
 | Transaction Report Routes
 |--------------------------------------------------------------------------
 */

@@ -85,6 +85,12 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <a href="{{ route('laporan.buku') }}" class="nav-link {{ Route::currentRouteName() == 'laporan.buku' ? 'active' : '' }}" class="nav-link">
+                                        <i class="fas fa-book nav-icon"></i>
+                                        <p>Buku</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('laporan.transaksi') }}" class="nav-link {{ Route::currentRouteName() == 'laporan.transaksi' ? 'active' : '' }}" class="nav-link">
                                         <i class="fas fa-balance-scale nav-icon"></i>
                                         <p>Transaksi Peminjaman</p>
