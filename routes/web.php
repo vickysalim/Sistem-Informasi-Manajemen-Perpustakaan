@@ -130,6 +130,16 @@ Route::delete('/dashboard/buku/{book}/hapus',
     [DashboardBookController::class, 'destroy']
 )->middleware(['role:Admin, Petugas'])->name('buku.destroy');
 
+// 404
+
+Route::get('/dashboard/buku/{book}/edit', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
+Route::get('/dashboard/buku/{book}/hapus', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
 /*
 |--------------------------------------------------------------------------
 | Transaction Report Routes
