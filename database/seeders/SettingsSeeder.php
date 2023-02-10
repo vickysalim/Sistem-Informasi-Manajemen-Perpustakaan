@@ -39,5 +39,15 @@ class SettingsSeeder extends Seeder
             'value' => 'Principal Name'
         ]);
 
+        Setting::create([
+            'key' => 'institution_name',
+            'value' => 'Institution XYZ'
+        ]);
+
+        Setting::create([
+            'key' => 'institution_city',
+            'value' => 'XYZ City'
+        ]);
+
     }
 }
