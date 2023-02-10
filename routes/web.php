@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\MemberController as DashboardMemberController
 use App\Http\Controllers\Dashboard\BookController as DashboardBookController;
 
 use App\Http\Controllers\Dashboard\Report\BookController as DashboardBookReportController;
+use App\Http\Controllers\Dashboard\Report\TransactionController as DashboardTransactionReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,9 +163,13 @@ Route::get('/dashboard/laporan/buku/cetak',
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard/laporan/transaksi', function () {
-    return view('pages.dashboard.laporan.transaksi');
-})->middleware(['auth'])->name('laporan.transaksi');
+Route::get('/dashboard/laporan/transaksi',
+    [DashboardTransactionReportController::class, 'index']
+)->middleware(['role:Admin, Petugas'])->name('laporan.transaksi');
+
+Route::get('/dashboard/laporan/transaksi/cetak',
+    [DashboardTransactionReportController::class, 'getReport']
+)->middleware(['role:Admin, Petugas'])->name('laporan.transaksi.pdf');
 
 /*
 |--------------------------------------------------------------------------
