@@ -28,7 +28,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="tanggalCetak">Tanggal Cetak</label>
-                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak">
+                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak" required>
+                    @error('tanggalCetak')
+                        <div class="text-danger">{{ $message }}</div>    
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

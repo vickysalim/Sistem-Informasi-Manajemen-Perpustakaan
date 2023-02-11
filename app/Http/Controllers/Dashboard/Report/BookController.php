@@ -16,16 +16,30 @@ class BookController extends Controller
     }
 
     public function getReport(Request $request) {
+        // validate
+        $validate = $request->validate([
+            'tanggalCetak' => 'required'
+        ]);
+
+        // get data from settings
         $institutionNameData = Setting::where('key', 'institution_name')->first();
         $cityData = Setting::where('key', 'institution_city')->first();
         $principalData = Setting::where('key', 'principal')->first();
         $headLibrarianData = Setting::where('key', 'head_librarian')->first();
 
-        $printDateData = $request->tanggalCetak;
+        // get data from form
+        $printDateData = $validate['tanggalCetak'];
 
+        // get record from book
         $bookData = Book::all();
-        
-        $pdf = \PDF::loadView('pages.dashboard.pdf.buku', compact('institutionNameData','cityData', 'principalData', 'headLibrarianData','printDateData','bookData'));
+
+        // get statistic from book
+        $bookCountData = Book::all()->count();
+        $loanedBookCountData = Book::where('status', 'Sedang Dipinjam')->count();
+        $availableBookCountData = Book::where('status', 'Tersedia')->count();
+
+        // redirect
+        $pdf = \PDF::loadView('pages.dashboard.pdf.buku', compact('institutionNameData','cityData', 'principalData', 'headLibrarianData','printDateData','bookData', 'bookCountData', 'loanedBookCountData', 'availableBookCountData'));
         return $pdf->stream();
     }
 }

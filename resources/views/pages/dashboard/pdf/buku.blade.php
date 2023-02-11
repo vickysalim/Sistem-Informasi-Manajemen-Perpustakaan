@@ -10,6 +10,26 @@
 
     <hr>
 
+    <div>
+        <table style="width:auto !important;">
+            <tr>
+                <td>Total Buku</td>
+                <td>:</td>
+                <td>{{ $bookCountData }} buku</td>
+            </tr>
+            <tr>
+                <td>Total Buku yang Dipinjam</td>
+                <td>:</td>
+                <td>{{ $loanedBookCountData }} buku</td>
+            </tr>
+            <tr>
+                <td>Total Buku Tersedia</td>
+                <td>:</td>
+                <td>{{ $availableBookCountData }} buku</td>
+            </tr>
+        </table>
+    </div>
+
     <table class="data-table">
         <thead>
             <tr>
