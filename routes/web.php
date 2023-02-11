@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\BookController as DashboardBookController;
 use App\Http\Controllers\Dashboard\Report\BookController as DashboardBookReportController;
 use App\Http\Controllers\Dashboard\Report\TransactionController as DashboardTransactionReportController;
 use App\Http\Controllers\Dashboard\Report\MemberController as DashboardMemberReportController;
+use App\Http\Controllers\Dashboard\Report\VisitorController as DashboardVisitorReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,9 +193,14 @@ Route::get('/dashboard/laporan/anggota/cetak',
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard/laporan/pengunjung', function () {
-    return view('pages.dashboard.laporan.pengunjung');
-})->middleware(['auth'])->name('laporan.pengunjung');
+Route::get('/dashboard/laporan/pengunjung',
+    [DashboardVisitorReportController::class, 'index']
+)->middleware(['role:Admin, Petugas'])->name('laporan.pengunjung');
+
+Route::get('/dashboard/laporan/pengunjung/cetak',
+    [DashboardVisitorReportController::class, 'getReport']
+)->middleware(['role:Admin, Petugas'])->name('laporan.pengunjung.pdf');
+
 
 /*
 |--------------------------------------------------------------------------

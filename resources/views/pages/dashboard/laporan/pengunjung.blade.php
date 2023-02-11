@@ -3,53 +3,65 @@
 @section('title', 'Laporan Pengunjung')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Cek Laporan Pengunjung</h3>
+    <!-- Alert Message -->
+    @if (session()->has('danger'))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h6 class="mb-0"><i class="icon fas fa-ban"></i> 
+            {{ session()->get('danger') }}
+        </h6>
+    </div>
+    @endif
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h6 class="mb-0"><i class="icon fas fa-check"></i> {{ session()->get('success') }}</h6>
+    </div>
+    @endif
+
+<!-- Search Data -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Cek Laporan Pengunjung</h3>
+        </div>
+        <form method="GET" action="{{ route('laporan.pengunjung.pdf') }}">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="tanggalCetak">Tanggal Cetak</label>
+                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak" required>
+                    @error('tanggalCetak')
+                        <div class="text-danger">{{ $message }}</div>    
+                    @enderror
                 </div>
-                <form>
-                    <div class="card-body">
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h6 class="mb-0"><i class="icon fas fa-ban"></i> Error! Data yang Anda masukkan tidak valid</h6>
+                <div class="form-group">
+                    <label for="thnAjaranAwal">Tahun Ajaran</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Juli</span>
+                                </div>
+                                <input type="number" class="form-control" id="thnAjaranAwal" name="thnAjaranAwal" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="tanggalCetak">Tanggal Cetak</label>
-                            <input type="date" class="form-control" id="tanggalCetak">
+                        <div class="col-sm-2 text-center">
+                            s/d
                         </div>
-                        <div class="form-group">
-                            <label for="thnAjaranAwal">Tahun Ajaran</label>
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Juli</span>
-                                        </div>
-                                        <input type="number" class="form-control" id="thnAjaranAwal">
-                                    </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Juni</span>
                                 </div>
-                                <div class="col-sm-2 text-center">
-                                    s/d
-                                </div>
-                                <div class="col-sm-5">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Juni</span>
-                                        </div>
-                                        <input type="number" class="form-control" id="thnAjaranAwal">
-                                    </div>
-                                </div>
+                                <input type="number" class="form-control" id="thnAjaranAkhir" name="thnAjaranAkhir" required>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Cetak</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Cetak</button>
+            </div>
+        </form>
     </div>
 @endsection
 
