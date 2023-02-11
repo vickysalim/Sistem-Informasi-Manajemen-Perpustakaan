@@ -39,6 +39,6 @@ class BookController extends Controller
 
         // redirect
         $pdf = \PDF::loadView('pages.dashboard.pdf.buku', compact('institutionNameData','cityData', 'principalData', 'headLibrarianData','printDateData','bookData', 'bookCountData', 'loanedBookCountData', 'availableBookCountData'));
-        return $pdf->stream();
+        return $pdf->stream('laporan_buku_'.md5(time()).'.pdf');
     }
 }

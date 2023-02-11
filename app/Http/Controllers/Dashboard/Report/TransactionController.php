@@ -46,6 +46,6 @@ class TransactionController extends Controller
 
         // redirect
         $pdf = \PDF::loadView('pages.dashboard.pdf.transaksi', compact('institutionNameData','cityData', 'principalData', 'headLibrarianData','printDateData','startDate', 'endDate', 'circulationData', 'loaneeCountData', 'transactionCountData', 'fineSumData', 'loanAverageData'));
-        return $pdf->stream();
+        return $pdf->stream('laporan_transaksi_'.md5(time()).'.pdf');
     }
 }
