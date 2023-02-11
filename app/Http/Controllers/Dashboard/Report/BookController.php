@@ -11,8 +11,7 @@ use App\Models\Book;
 class BookController extends Controller
 {
     public function index() {
-        $bookData = Book::all();
-        return view('pages.dashboard.laporan.buku', compact('bookData'));
+        return view('pages.dashboard.laporan.buku');
     }
 
     public function getReport(Request $request) {
