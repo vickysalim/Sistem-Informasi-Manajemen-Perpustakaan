@@ -43,6 +43,11 @@ class CirculationController extends Controller
             return redirect()->route('sirkulasi')->with('danger', 'Anggota dengan ID ' . $validate['idAnggota'] . ' tidak dapat meminjam buku karena statusnya non-aktif');
         }
 
+        // if book status is not available then return error
+        if (Book::where('id', $validate['idBuku'])->first()->status == 'Sedang Dipinjam') {
+            return redirect()->route('sirkulasi')->with('danger', 'Buku dengan ID ' . $validate['idBuku'] . ' tidak dapat dipinjam karena sedang dipinjam anggota lain');
+        }
+
         // get loan duration data
         $loanDurationData = Setting::where('key', 'loan_duration')->first();
         $addDurationFormat = '+' . $loanDurationData->value . 'days';
@@ -68,6 +73,12 @@ class CirculationController extends Controller
             
             // save
             $circulation->save();
+
+            // update book status
+            Book::where('id', $validate['idBuku'])
+                ->update([
+                    'status' => 'Sedang Dipinjam'
+                ]);
         } catch (\Exception $e) {
             return redirect()->route('sirkulasi')->with('danger', 'Gagal menambahkan data sirkulasi');
         }
@@ -157,6 +168,12 @@ class CirculationController extends Controller
                 'fine_sum' => $currentFineSum + $totalFine,
                 'return_date' => date('Y-m-d'),
                 'status' => 'Selesai'
+            ]);
+
+        // update book status
+        Book::where('id', $circulation->book_id)
+            ->update([
+                'status' => 'Tersedia'
             ]);
 
         // redirect
