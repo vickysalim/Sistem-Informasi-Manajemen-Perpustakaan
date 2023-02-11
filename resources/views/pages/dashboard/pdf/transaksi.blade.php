@@ -59,7 +59,7 @@
                     <td class="text-center">{{ $item->Book->name }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->loan_date }}</td>
-                    <td>{{ $item->returnDate }}</td>
+                    <td>{{ $item->return_date }}</td>
                     <td class="text-center">{{ $item->fine_sum }}</td>
                 </tr>
             @endforeach

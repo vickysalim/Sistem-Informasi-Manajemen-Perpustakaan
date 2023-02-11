@@ -28,7 +28,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="tanggalCetak">Tanggal Cetak</label>
-                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak">
+                    <input type="date" class="form-control" id="tanggalCetak" name="tanggalCetak" required>
+                    @error('tanggalCetak')
+                        <div class="text-danger">{{ $message }}</div>    
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="thnAjaranAwal">Tahun Ajaran</label>
@@ -38,7 +41,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Juli</span>
                                 </div>
-                                <input type="number" class="form-control" id="thnAjaranAwal" name="thnAjaranAwal">
+                                <input type="number" class="form-control" id="thnAjaranAwal" name="thnAjaranAwal" required>
                             </div>
                         </div>
                         <div class="col-sm-2 text-center">
@@ -49,10 +52,16 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Juni</span>
                                 </div>
-                                <input type="number" class="form-control" id="thnAjaranAkhir" name="thnAjaranAkhir">
+                                <input type="number" class="form-control" id="thnAjaranAkhir" name="thnAjaranAkhir" required>
                             </div>
                         </div>
                     </div>
+                    @error('thnAjaranAwal')
+                        <div class="text-danger">{{ $message }}</div>    
+                    @enderror
+                    @error('thnAjaranAkhir')
+                        <div class="text-danger">{{ $message }}</div>    
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
