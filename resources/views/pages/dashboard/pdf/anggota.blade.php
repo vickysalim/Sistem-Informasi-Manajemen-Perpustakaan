@@ -1,6 +1,6 @@
 @extends('layout.pdf')
 
-@section('title', 'Laporan Transaksi')
+@section('title', 'Laporan Anggota')
 
 @section('content')
     <div class="text-center">

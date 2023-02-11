@@ -1,6 +1,6 @@
 @extends('layout.pdf')
 
-@section('title', 'Laporan Buku')
+@section('title', 'Laporan Transaksi Peminjaman')
 
 @section('content')
     <div class="text-center">
@@ -53,9 +53,9 @@
             @foreach ($circulationData as $item)
                 <tr>
                     <td class="text-center">{{ $loop->index + 1 }}</td>
-                    <th>{{ $item->member_id }}232323</th>
+                    <td>{{ $item->member_id }}232323</td>
                     <td>{{ $item->Member->name }}</td>
-                    <th>{{ $item->book_id }}</th>
+                    <td>{{ $item->book_id }}</td>
                     <td class="text-center">{{ $item->Book->name }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->loan_date }}</td>

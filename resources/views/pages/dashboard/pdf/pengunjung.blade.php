@@ -1,10 +1,10 @@
 @extends('layout.pdf')
 
-@section('title', 'Laporan Buku')
+@section('title', 'Laporan Pengunjung')
 
 @section('content')
     <div class="text-center">
-        <h3>Laporan Transaksi Peminjaman</h3>
+        <h3>Laporan Pengunjung</h3>
         <h4>Perpustakaan {{ $institutionNameData->value }}</h4>
     </div>
 
