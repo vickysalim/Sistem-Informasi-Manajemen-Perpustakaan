@@ -60,24 +60,26 @@
                                 <p>Beranda</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sirkulasi') }}" class="nav-link {{ Route::currentRouteName() == 'sirkulasi' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-sync"></i>
-                                <p>Sirkulasi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('anggota') }}" class="nav-link {{ Route::currentRouteName() == 'anggota' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Anggota</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('buku') }}" class="nav-link {{ Route::currentRouteName() == 'buku' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>Buku</p>
-                            </a>
-                        </li>
+                        @if (Auth::User()->role == 'Admin' || Auth::User()->role == 'Petugas')
+                            <li class="nav-item">
+                                <a href="{{ route('sirkulasi') }}" class="nav-link {{ Route::currentRouteName() == 'sirkulasi' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sync"></i>
+                                    <p>Sirkulasi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('anggota') }}" class="nav-link {{ Route::currentRouteName() == 'anggota' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>Anggota</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('buku') }}" class="nav-link {{ Route::currentRouteName() == 'buku' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Buku</p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-bar"></i>

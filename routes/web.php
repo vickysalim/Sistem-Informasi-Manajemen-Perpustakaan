@@ -153,11 +153,11 @@ Route::get('/dashboard/buku/{book}/hapus', function () {
 
 Route::get('/dashboard/laporan/buku',
     [DashboardBookReportController::class, 'index']
-)->middleware(['role:Admin, Petugas'])->name('laporan.buku');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.buku');
 
 Route::get('/dashboard/laporan/buku/cetak',
     [DashboardBookReportController::class, 'getReport']
-)->middleware(['role:Admin, Petugas'])->name('laporan.buku.pdf');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.buku.pdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -167,11 +167,11 @@ Route::get('/dashboard/laporan/buku/cetak',
 
 Route::get('/dashboard/laporan/transaksi',
     [DashboardTransactionReportController::class, 'index']
-)->middleware(['role:Admin, Petugas'])->name('laporan.transaksi');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.transaksi');
 
 Route::get('/dashboard/laporan/transaksi/cetak',
     [DashboardTransactionReportController::class, 'getReport']
-)->middleware(['role:Admin, Petugas'])->name('laporan.transaksi.pdf');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.transaksi.pdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -181,11 +181,11 @@ Route::get('/dashboard/laporan/transaksi/cetak',
 
 Route::get('/dashboard/laporan/anggota',
     [DashboardMemberReportController::class, 'index']
-)->middleware(['role:Admin, Petugas'])->name('laporan.anggota');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.anggota');
 
 Route::get('/dashboard/laporan/anggota/cetak',
     [DashboardMemberReportController::class, 'getReport']
-)->middleware(['role:Admin, Petugas'])->name('laporan.anggota.pdf');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.anggota.pdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -195,11 +195,11 @@ Route::get('/dashboard/laporan/anggota/cetak',
 
 Route::get('/dashboard/laporan/pengunjung',
     [DashboardVisitorReportController::class, 'index']
-)->middleware(['role:Admin, Petugas'])->name('laporan.pengunjung');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.pengunjung');
 
 Route::get('/dashboard/laporan/pengunjung/cetak',
     [DashboardVisitorReportController::class, 'getReport']
-)->middleware(['role:Admin, Petugas'])->name('laporan.pengunjung.pdf');
+)->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.pengunjung.pdf');
 
 
 /*
