@@ -1,6 +1,6 @@
 @extends('layout.dashboard')
 
-@section('title', 'Sirkulasi')
+@section('title', 'Pengaturan Akun')
 
 @section('content')
     <!-- Alert Message -->
@@ -47,7 +47,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="radioAdmin">Tipe Akun</label>
+                    <label for="radioAdmin">Tipe Akun <span class="text-xs text-danger">Catatan: Tipe akun tidak dapat diubah ketika akun telah dibuat</span></label>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="radioAdmin" name="tipeAkun" value="Admin" required>
                         <label for="radioAdmin" class="custom-control-label font-weight-normal">Admin</label>
