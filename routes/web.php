@@ -213,6 +213,10 @@ Route::get('/dashboard/pengaturan/akun',
     [DashboardAccountSettingsController::class, 'index']
 )->middleware(['role:Admin'])->name('pengaturan.akun');
 
+Route::post('/dashboard/pengaturan/akun',
+    [DashboardAccountSettingsController::class, 'store']
+)->middleware(['role:Admin'])->name('pengaturan.akun.store');
+
 Route::put('/dashboard/pengaturan/akun/{user}/edit',
     [DashboardAccountSettingsController::class, 'update']
 )->middleware(['role:Admin'])->name('pengaturan.akun.update');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 
 class AccountController extends Controller
@@ -12,6 +14,34 @@ class AccountController extends Controller
     public function index() {
         $accountData = User::all();
         return view('pages.dashboard.pengaturan.akun', compact('accountData'));
+    }
+
+    public function store(Request $request) {
+        // validate
+        $validate = $request->validate([
+            'namaLengkap' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'tipeAkun' => 'required',
+        ]);
+
+        // check if email already exists
+        if (User::where('email', $validate['email'])->exists()) {
+            return redirect()->route('pengaturan.akun')->with('danger', 'Email sudah terdaftar!');
+        }
+
+        // store
+        $user = new User;
+        $user->name = $validate['namaLengkap'];
+        $user->email = $validate['email'];
+        $user->password = Hash::make($validate['password']);
+        $user->role = $validate['tipeAkun'];
+
+        // save
+        $user->save();
+
+        // redirect
+        return redirect()->route('pengaturan.akun')->with('success', 'Akun berhasil ditambahkan!');
     }
 
     public function update(Request $request, User $user) {
