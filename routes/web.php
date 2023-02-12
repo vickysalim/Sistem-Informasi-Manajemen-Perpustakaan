@@ -225,6 +225,15 @@ Route::delete('/dashboard/pengaturan/akun/{user}/hapus',
     [DashboardAccountSettingsController::class, 'destroy']
 )->middleware(['role:Admin'])->name('pengaturan.akun.destroy');
 
+// 404
+
+Route::get('/dashboard/pengaturan/akun/{user}/edit', function () {
+    return abort(404);
+})->middleware(['role:Admin']);
+
+Route::get('/dashboard/pengaturan/akun/{user}/hapus', function () {
+    return abort(404);
+})->middleware(['role:Admin']);
 
 /*
 |--------------------------------------------------------------------------

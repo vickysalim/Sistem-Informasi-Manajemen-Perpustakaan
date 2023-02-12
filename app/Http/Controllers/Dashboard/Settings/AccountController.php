@@ -49,7 +49,30 @@ class AccountController extends Controller
     }
 
     public function update(Request $request, User $user) {
+        // validate
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
 
+        // check if email is already exist & check if email is not same
+        if (User::where('email', $validate['email'])->exists() && $user->email != $validate['email']) {
+            return redirect()->route('pengaturan.akun')->with('danger', 'Email sudah ada');
+        }
+
+        try {
+            // update
+            User::where('id', $user->id)
+                ->update([
+                    'name' => $validate['name'],
+                    'email' => $validate['email']
+                ]);
+        } catch (\Exception $e) {
+            return redirect()->route('pengaturan.akun')->with('danger', 'Gagal mengubah data akun');
+        }
+
+        // redirect
+        return redirect()->route('pengaturan.akun')->with('success', 'Berhasil mengubah data akun');
     }
 
     public function destroy(Request $request, User $user) {
