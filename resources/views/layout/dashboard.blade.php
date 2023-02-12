@@ -112,6 +112,28 @@
                                 </li>
                             </ul>
                         </li>
+                        @if (Auth::User()->role == 'Admin')
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-cog"></i>
+                                    <p>Pengaturan<i class="fas fa-angle-left right"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link {{ Route::currentRouteName() == '#' ? 'active' : '' }}" class="nav-link">
+                                            <i class="fas fa-sliders-h nav-icon"></i>
+                                            <p>Umum</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('pengaturan.akun') }}" class="nav-link {{ Route::currentRouteName() == 'pengaturan.akun' ? 'active' : '' }}" class="nav-link">
+                                            <i class="fas fa-users-cog nav-icon"></i>
+                                            <p>Akun</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

@@ -13,6 +13,8 @@ use App\Http\Controllers\Dashboard\Report\TransactionController as DashboardTran
 use App\Http\Controllers\Dashboard\Report\MemberController as DashboardMemberReportController;
 use App\Http\Controllers\Dashboard\Report\VisitorController as DashboardVisitorReportController;
 
+use App\Http\Controllers\Dashboard\Settings\AccountController as DashboardAccountSettingsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -200,6 +202,24 @@ Route::get('/dashboard/laporan/pengunjung',
 Route::get('/dashboard/laporan/pengunjung/cetak',
     [DashboardVisitorReportController::class, 'getReport']
 )->middleware(['role:Admin, Petugas, Kepala Sekolah'])->name('laporan.pengunjung.pdf');
+
+/*
+|--------------------------------------------------------------------------
+| Account Settings Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/dashboard/pengaturan/akun',
+    [DashboardAccountSettingsController::class, 'index']
+)->middleware(['role:Admin'])->name('pengaturan.akun');
+
+Route::put('/dashboard/pengaturan/akun/{user}/edit',
+    [DashboardAccountSettingsController::class, 'update']
+)->middleware(['role:Admin'])->name('pengaturan.akun.update');
+
+Route::delete('/dashboard/pengaturan/akun/{user}/hapus',
+    [DashboardAccountSettingsController::class, 'destroy']
+)->middleware(['role:Admin'])->name('pengaturan.akun.destroy');
 
 
 /*
