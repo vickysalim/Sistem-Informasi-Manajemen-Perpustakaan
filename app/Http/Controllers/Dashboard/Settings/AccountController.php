@@ -41,7 +41,7 @@ class AccountController extends Controller
             // save
             $user->save();
         } catch (\Exception $e) {
-            return redirect()->route('pengaturan.akun')->with('danger', 'Gagal menambahkan data akun');
+            return redirect()->route('pengaturan.akun')->with('danger', 'Gagal menambahkan data buku');
         }
 
         // redirect
@@ -53,6 +53,14 @@ class AccountController extends Controller
     }
 
     public function destroy(Request $request, User $user) {
+        try {
+            // delete
+            User::where('id', $user->id)->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('pengaturan.akun')->with('danger', 'Gagal menghapus data akun');
+        }
 
+        // redirect
+        return redirect()->route('pengaturan.akun')->with('success', 'Akun berhasil dihapus!');
     }
 }
