@@ -30,15 +30,19 @@ class AccountController extends Controller
             return redirect()->route('pengaturan.akun')->with('danger', 'Email sudah terdaftar!');
         }
 
-        // store
-        $user = new User;
-        $user->name = $validate['namaLengkap'];
-        $user->email = $validate['email'];
-        $user->password = Hash::make($validate['password']);
-        $user->role = $validate['tipeAkun'];
-
-        // save
-        $user->save();
+        try {
+            // store
+            $user = new User;
+            $user->name = $validate['namaLengkap'];
+            $user->email = $validate['email'];
+            $user->password = Hash::make($validate['password']);
+            $user->role = $validate['tipeAkun'];
+    
+            // save
+            $user->save();
+        } catch (\Exception $e) {
+            return redirect()->route('pengaturan.akun')->with('danger', 'Gagal menambahkan data akun');
+        }
 
         // redirect
         return redirect()->route('pengaturan.akun')->with('success', 'Akun berhasil ditambahkan!');
