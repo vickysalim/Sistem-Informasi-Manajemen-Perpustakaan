@@ -25,26 +25,7 @@
         <form action="#" method="POST">
             @csrf
             <div class="card-body">
-                <div class="form-group">
-                    <label for="loanDuration">Durasi Peminjaman</label>
-                    <input type="number" class="form-control" id="loanDuration" name="loanDuration" placeholder="Masukkan Durasi Peminjaman (dalam format hari)" value="{{ $settingsData[0]->value }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="fine">Jumlah Denda per Hari</label>
-                    <input type="number" class="form-control" id="fine" name="fine" placeholder="Masukkan Jumlah Denda per Hari (dalam format nominal denda)" value="{{ $settingsData[1]->value }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="extendLimit">Batas Jumlah Peminjaman</label>
-                    <input type="number" class="form-control" id="extendLimit" name="extendLimit" placeholder="Masukkan Batas Jumlah Peminjaman (dalam format angka)" value="{{ $settingsData[2]->value }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="headLibrarian">Kepala Perpustakaan</label>
-                    <input type="text" class="form-control" id="headLibrarian" name="headLibrarian" placeholder="Masukkan Nama Kepala Perpustakaan" value="{{ $settingsData[3]->value }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="principal">Kepala Sekolah</label>
-                    <input type="text" class="form-control" id="principal" name="principal" placeholder="Masukkan Nama Kepala Sekolah" value="{{ $settingsData[4]->value }}" required>
-                </div>
+                <p class="text-center text-muted"><i class="fas fa-school mr-1"></i> Institusi</p>
                 <div class="form-group">
                     <label for="institutionName">Nama Institusi</label>
                     <input type="text" class="form-control" id="institutionName" name="institutionName" placeholder="Masukkan Nama Institusi" value="{{ $settingsData[5]->value }}" required>
@@ -56,6 +37,48 @@
                 <div class="form-group">
                     <label for="institutionAddress">Alamat Institusi</label>
                     <input type="text" class="form-control" id="institutionAddress" name="institutionAddress" placeholder="Masukkan Alamat Institusi" value="{{ $settingsData[7]->value }}" required>
+                </div>
+                <hr>
+                <p class="text-center text-muted mt-4"><i class="fas fa-user mr-1"></i> Personil</p>
+                <div class="form-group">
+                    <label for="principal">Kepala Sekolah</label>
+                    <input type="text" class="form-control" id="principal" name="principal" placeholder="Masukkan Nama Kepala Sekolah" value="{{ $settingsData[4]->value }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="headLibrarian">Kepala Perpustakaan</label>
+                    <input type="text" class="form-control" id="headLibrarian" name="headLibrarian" placeholder="Masukkan Nama Kepala Perpustakaan" value="{{ $settingsData[3]->value }}" required>
+                </div>
+                <hr>
+                <p class="text-center text-muted mt-4"><i class="fas fa-sync mr-1"></i> Peminjaman</p>
+                <div class="form-group">
+                    <label for="loanDuration">Durasi Peminjaman</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="loanDuration" name="loanDuration" placeholder="Masukkan Durasi Peminjaman" value="{{ $settingsData[0]->value }}" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text">hari</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fine">Jumlah Denda</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp</span>
+                        </div>
+                        <input type="number" class="form-control" id="fine" name="fine" placeholder="Masukkan Jumlah Denda" value="{{ $settingsData[1]->value }}" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text">per hari</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="extendLimit">Batas Jumlah Peminjaman</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="extendLimit" name="extendLimit" placeholder="Masukkan Batas Jumlah Peminjaman" value="{{ $settingsData[2]->value }}" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text">kali</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
