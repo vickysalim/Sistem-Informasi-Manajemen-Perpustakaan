@@ -100,7 +100,7 @@
                 <div class="form-group">
                     <label for="loanDuration">Logo Institusi</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="institution_logo" name="institution_logo" accept="image/*">
+                        <input type="file" class="custom-file-input" id="institution_logo" name="institution_logo" accept="image/*" required>
                         <label class="custom-file-label" for="institution_logo" id="edit-institution-logo">Upload logo institusi (.jpg atau .png)</label>
                     </div>
                     @if ($settingsData[8]->value != null)
