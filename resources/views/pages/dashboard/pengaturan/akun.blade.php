@@ -22,7 +22,7 @@
         <div class="card-header">
             <h3 class="card-title">Tambah Akun Baru</h3>
         </div>
-        <form action="#" method="POST">
+        <form action="{{ route('pengaturan.akun.store') }}" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-group">
