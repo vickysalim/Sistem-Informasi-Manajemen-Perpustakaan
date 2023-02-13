@@ -246,6 +246,14 @@ Route::get('/dashboard/pengaturan/umum',
     [DashboardGeneralSettingsController::class, 'index']
 )->middleware(['role:Admin'])->name('pengaturan.umum');
 
+Route::put('/dashboard/pengaturan/umum',
+    [DashboardGeneralSettingsController::class, 'update']
+)->middleware(['role:Admin'])->name('pengaturan.umum.update');
+
+Route::patch('/dashboard/pengaturan/umum',
+    [DashboardGeneralSettingsController::class, 'updateLogo']
+)->middleware(['role:Admin'])->name('pengaturan.umum.logo');
+
 /*
 |--------------------------------------------------------------------------
 | Profile Routes

@@ -22,21 +22,22 @@
         <div class="card-header">
             <h3 class="card-title">Pengaturan Aplikasi</h3>
         </div>
-        <form action="#" method="POST">
+        <form action="{{ route('pengaturan.umum.update') }}" method="POST">
+            @method('PUT')
             @csrf
             <div class="card-body">
                 <p class="text-center text-muted"><i class="fas fa-school mr-1"></i> Institusi</p>
                 <div class="form-group">
-                    <label for="institutionName">Nama Institusi</label>
-                    <input type="text" class="form-control" id="institutionName" name="institutionName" placeholder="Masukkan Nama Institusi" value="{{ $settingsData[5]->value }}" required>
+                    <label for="institution_name">Nama Institusi</label>
+                    <input type="text" class="form-control" id="institution_name" name="institution_name" placeholder="Masukkan Nama Institusi" value="{{ $settingsData[5]->value }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="institutionCity">Kota Institusi</label>
-                    <input type="text" class="form-control" id="institutionCity" name="institutionCity" placeholder="Masukkan Kota Institusi" value="{{ $settingsData[6]->value }}" required>
+                    <label for="institution_city">Kota Institusi</label>
+                    <input type="text" class="form-control" id="institution_city" name="institution_city" placeholder="Masukkan Kota Institusi" value="{{ $settingsData[6]->value }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="institutionAddress">Alamat Institusi</label>
-                    <input type="text" class="form-control" id="institutionAddress" name="institutionAddress" placeholder="Masukkan Alamat Institusi" value="{{ $settingsData[7]->value }}" required>
+                    <label for="institution_address">Alamat Institusi</label>
+                    <input type="text" class="form-control" id="institution_address" name="institution_address" placeholder="Masukkan Alamat Institusi" value="{{ $settingsData[7]->value }}" required>
                 </div>
                 <hr>
                 <p class="text-center text-muted mt-4"><i class="fas fa-user mr-1"></i> Personil</p>
@@ -45,15 +46,15 @@
                     <input type="text" class="form-control" id="principal" name="principal" placeholder="Masukkan Nama Kepala Sekolah" value="{{ $settingsData[4]->value }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="headLibrarian">Kepala Perpustakaan</label>
-                    <input type="text" class="form-control" id="headLibrarian" name="headLibrarian" placeholder="Masukkan Nama Kepala Perpustakaan" value="{{ $settingsData[3]->value }}" required>
+                    <label for="head_librarian">Kepala Perpustakaan</label>
+                    <input type="text" class="form-control" id="head_librarian" name="head_librarian" placeholder="Masukkan Nama Kepala Perpustakaan" value="{{ $settingsData[3]->value }}" required>
                 </div>
                 <hr>
                 <p class="text-center text-muted mt-4"><i class="fas fa-sync mr-1"></i> Peminjaman</p>
                 <div class="form-group">
-                    <label for="loanDuration">Durasi Peminjaman</label>
+                    <label for="loan_duration">Durasi Peminjaman</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="loanDuration" name="loanDuration" placeholder="Masukkan Durasi Peminjaman" value="{{ $settingsData[0]->value }}" required>
+                        <input type="number" class="form-control" id="loan_duration" name="loan_duration" placeholder="Masukkan Durasi Peminjaman" value="{{ $settingsData[0]->value }}" required>
                         <div class="input-group-append">
                             <span class="input-group-text">hari</span>
                         </div>
@@ -72,9 +73,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="extendLimit">Batas Jumlah Peminjaman</label>
+                    <label for="extend_limit">Batas Jumlah Peminjaman</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="extendLimit" name="extendLimit" placeholder="Masukkan Batas Jumlah Peminjaman" value="{{ $settingsData[2]->value }}" required>
+                        <input type="number" class="form-control" id="extend_limit" name="extend_limit" placeholder="Masukkan Batas Jumlah Peminjaman" value="{{ $settingsData[2]->value }}" required>
                         <div class="input-group-append">
                             <span class="input-group-text">kali</span>
                         </div>
