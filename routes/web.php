@@ -250,7 +250,7 @@ Route::put('/dashboard/pengaturan/umum',
     [DashboardGeneralSettingsController::class, 'update']
 )->middleware(['role:Admin'])->name('pengaturan.umum.update');
 
-Route::patch('/dashboard/pengaturan/umum',
+Route::patch('/dashboard/pengaturan/umum/upload-logo',
     [DashboardGeneralSettingsController::class, 'updateLogo']
 )->middleware(['role:Admin'])->name('pengaturan.umum.logo');
 

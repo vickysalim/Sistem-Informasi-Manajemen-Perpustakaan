@@ -93,14 +93,15 @@
         <div class="card-header">
             <h3 class="card-title">Pengaturan Logo</h3>
         </div>
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('pengaturan.umum.logo') }}" method="POST" enctype="multipart/form-data">
+            @method('PATCH')
             @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="loanDuration">Logo Institusi</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="institutionLogo" name="institutionLogo" accept="image/*">
-                        <label class="custom-file-label" for="institutionLogo" id="edit-institution-logo">Upload logo institusi (.jpg atau .png)</label>
+                        <input type="file" class="custom-file-input" id="institution_logo" name="institution_logo" accept="image/*">
+                        <label class="custom-file-label" for="institution_logo" id="edit-institution-logo">Upload logo institusi (.jpg atau .png)</label>
                     </div>
                     @if ($settingsData[8]->value != null)
                         <a class="btn btn-link btn-sm p-0" target="_blank" href="{{ asset('storage/logo/'.$settingsData[8]->value) }}">Klik untuk akses logo</a>
@@ -116,7 +117,7 @@
 
 @section('script')
     <script>
-        $(document).on('change', '#institutionLogo', function (event) {
+        $(document).on('change', '#institution_logo', function (event) {
             $(this).next('#edit-institution-logo').html("File: " + event.target.files[0].name);
         })
     </script>
