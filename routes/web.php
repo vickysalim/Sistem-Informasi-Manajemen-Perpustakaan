@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\Report\MemberController as DashboardMemberRep
 use App\Http\Controllers\Dashboard\Report\VisitorController as DashboardVisitorReportController;
 
 use App\Http\Controllers\Dashboard\Settings\AccountController as DashboardAccountSettingsController;
+use App\Http\Controllers\Dashboard\Settings\GeneralController as DashboardGeneralSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -234,6 +235,16 @@ Route::get('/dashboard/pengaturan/akun/{user}/edit', function () {
 Route::get('/dashboard/pengaturan/akun/{user}/hapus', function () {
     return abort(404);
 })->middleware(['role:Admin']);
+
+/*
+|--------------------------------------------------------------------------
+| General Settings Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/dashboard/pengaturan/umum',
+    [DashboardGeneralSettingsController::class, 'index']
+)->middleware(['role:Admin'])->name('pengaturan.umum');
 
 /*
 |--------------------------------------------------------------------------

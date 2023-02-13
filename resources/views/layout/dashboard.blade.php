@@ -120,7 +120,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link {{ Route::currentRouteName() == '#' ? 'active' : '' }}" class="nav-link">
+                                        <a href="{{ route('pengaturan.umum') }}" class="nav-link {{ Route::currentRouteName() == 'pengaturan.umum' ? 'active' : '' }}" class="nav-link">
                                             <i class="fas fa-sliders-h nav-icon"></i>
                                             <p>Umum</p>
                                         </a>
