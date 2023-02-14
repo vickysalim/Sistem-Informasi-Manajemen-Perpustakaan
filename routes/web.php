@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Main\IndexController as IndexController;
+use App\Http\Controllers\Main\VisitorController as VisitorController;
 
 use App\Http\Controllers\Dashboard\IndexController as DashboardIndexController;
 use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculationController;
@@ -32,9 +33,13 @@ Route::get('/cari',
     [IndexController::class, 'search']
 )->name('cari');
 
-Route::get('/pengunjung', function () {
-    return view('pages.main.pengunjung');
-})->name('pengunjung');
+Route::get('/pengunjung',
+    [VisitorController::class, 'index']
+)->name('pengunjung');
+
+Route::post('/pengunjung',
+    [VisitorController::class, 'store']
+)->name('pengunjung.store');
 
 Route::get('/tentang', function () {
     return view('pages.main.tentang');
