@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Main\IndexController as IndexController;
+
 use App\Http\Controllers\Dashboard\IndexController as DashboardIndexController;
 use App\Http\Controllers\Dashboard\CirculationController as DashboardCirculationController;
 use App\Http\Controllers\Dashboard\MemberController as DashboardMemberController;
@@ -22,9 +24,9 @@ use App\Http\Controllers\Dashboard\Settings\GeneralController as DashboardGenera
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    return view('pages.main.index');
-})->name('main');
+Route::get('/',
+    [IndexController::class, 'index']
+)->name('main');
 
 Route::get('/pengunjung', function () {
     return view('pages.main.pengunjung');
