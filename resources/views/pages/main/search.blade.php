@@ -10,7 +10,7 @@
             <p class="lead text-muted">Masukkan kata kunci dari judul atau pengarang buku.</p>
             <form action="{{ route('cari') }}" method="GET">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cari buku" name="keyword">
+                    <input type="text" class="form-control" placeholder="Cari buku" name="keyword" value="{{ request()->keyword }}">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Cari</button>
                     </div>
@@ -22,7 +22,7 @@
     <!-- Book List -->
     <section class="jumbotron bg-white py-2">
         <div class="container">
-            <h4 class="text-center mb-4">Hasil Pencarian</h4>
+            <h4 class="text-center mb-4">Ditemukan <span class="text-primary">{{ count($bookData) }}</span> Hasil Pencarian untuk <span class="text-primary">{{ request()->keyword }}</span></h4>
             <div class="row">
                 @foreach ($bookData as $item)
                     <div class="card col-12 mb-3">
@@ -34,6 +34,7 @@
                                 <h5>{{ $item->name }}</h5>
                                 <p style="color: black;">{{ $item->author }}</p>
                                 <p class="card-text"><small class="text-muted">{{ $item->publisher }} - {{ $item->year }}</small></p>
+                                <div class="badge {{ $item->status == 'Tersedia' ? 'badge-success' : 'badge-danger'}}">{{ $item->status }}</div>
                             </div>
                         </a>
                     </div>
