@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Imports\MembersImport;
+
 use App\Models\Member;
 
 class MemberController extends Controller
@@ -42,6 +48,38 @@ class MemberController extends Controller
 
         // redirect
         return redirect()->route('anggota')->with('success', 'Berhasil menambahkan data anggota');
+    }
+
+    public function import(Request $request) {
+        // validate
+		$validate = $request->validate([
+			'excel' => 'required|mimes:xls,xlsx'
+		]);
+        
+        // get file extension
+        $fileExtension = $validate['excel']->getClientOriginalExtension();
+
+        // generate random file name
+        $fileName = Str::random(32) . '.' . $fileExtension;
+
+        try {
+            // store file in temporary directory
+            $validate['excel']->storeAs('public/temp', $fileName);
+
+            // import data from excel
+            Excel::import(new MembersImport, storage_path('app\\public\\temp\\' . $fileName));
+
+            // delete temporary file
+            File::delete(storage_path('app\\public\\temp\\' . $fileName));
+        } catch (\Illuminate\Database\QueryException $qE) {
+            return redirect()->route('anggota')->with('danger', 'Gagal mengimpor data anggota, pastikan ID anggota tidak pernah digunakan sebelumnya');
+        }
+        catch (\Exception $e) {
+            return redirect()->route('anggota')->with('danger', 'Gagal mengimpor data anggota' . $e);
+        }
+
+        // redirect
+        return redirect()->route('anggota')->with('success', 'Berhasil mengimpor data anggota');
     }
 
     public function switchStatus(Request $request, Member $member) {

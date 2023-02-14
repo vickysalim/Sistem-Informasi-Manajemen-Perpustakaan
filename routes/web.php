@@ -90,6 +90,10 @@ Route::post('/dashboard/anggota',
     [DashboardMemberController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('anggota.store');
 
+Route::post('/dashboard/anggota/import',
+    [DashboardMemberController::class, 'import']
+)->middleware(['role:Admin, Petugas'])->name('anggota.import');
+
 Route::patch('/dashboard/anggota/{member}/ubah-status',
     [DashboardMemberController::class, 'switchStatus']
 )->middleware(['role:Admin, Petugas'])->name('anggota.switch');
@@ -103,6 +107,10 @@ Route::delete('/dashboard/anggota/{member}/hapus',
 )->middleware(['role:Admin, Petugas'])->name('anggota.destroy');
 
 // 404
+
+Route::get('/dashboard/anggota/import', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
 
 Route::get('/dashboard/anggota/{member}/ubah-status', function () {
     return abort(404);

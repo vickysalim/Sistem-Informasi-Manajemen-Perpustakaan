@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <!-- Search Data -->
+    <!-- Add New Data -->
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Tambah Anggota Baru</h3>
@@ -58,6 +58,32 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Import Data -->
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Impor Data Buku</h3>
+        </div>
+        <form action="{{ route('anggota.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="excel">Impor Excel</label>
+                    <label for="excel" class="d-block text-xs text-danger">Catatan: Data per kolom wajib berurutan tanpa kepala tabel / table header (urutan kolom: ID Anggota, Nama); Status Anggota akan secara otomatis dijadikan sebagai Aktif</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="excel" name="excel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        <label class="custom-file-label" for="excel" id="excel-label">Upload foto excel (.xls atau .xlsx)</label>
+                    </div>
+                    @error('excel')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Impor</button>
             </div>
         </form>
     </div>
@@ -188,4 +214,9 @@
             });
         });
     </script>
+    <script>
+        $(document).on('change', '#excel', function (event) {
+            $(this).next('#excel-label').html("File: " + event.target.files[0].name);
+        })
+      </script>
 @endsection
