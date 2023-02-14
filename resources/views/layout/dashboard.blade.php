@@ -50,6 +50,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <div class="sidebar">
                 <a href="{{ url('') }}" class="brand-link">
+                    @if (file_exists('storage/logo/logo.png'))
+                        <img src="{{ asset('storage/logo/logo.png') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    @endif
                     <span class="brand-text font-weight-light">{{ preg_filter('/[^A-Z]/', '', config('app.name')) }}</span>
                 </a>
                 <nav class="mt-2">
