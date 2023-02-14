@@ -103,6 +103,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="excel">Impor Excel</label>
+                    <label for="excel" class="d-block text-xs text-danger">Catatan: Data per kolom wajib berurutan tanpa kepala tabel / table header (urutan kolom: ID Buku, Judul, Pengarang, Penerbit, Tahun, ISBN, Tipe Buku)</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="excel" name="excel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                         <label class="custom-file-label" for="excel" id="excel-label">Upload foto excel (.xls atau .xlsx)</label>
