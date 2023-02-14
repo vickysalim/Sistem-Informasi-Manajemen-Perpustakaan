@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Book;
+use App\Models\Setting;
 
 class IndexController extends Controller
 {
@@ -33,5 +34,12 @@ class IndexController extends Controller
         $bookData = Book::where('id', $book->id)->first();
 
         return view('pages.main.buku', compact('bookData'));
+    }
+
+    public function about() {
+        // get data from settings
+        $settingsData = Setting::all();
+
+        return view('pages.main.tentang', compact('settingsData'));
     }
 }

@@ -45,9 +45,9 @@ Route::post('/pengunjung',
     [VisitorController::class, 'store']
 )->name('pengunjung.store');
 
-Route::get('/tentang', function () {
-    return view('pages.main.tentang');
-})->name('tentang');
+Route::get('/tentang',
+    [IndexController::class, 'about']
+)->name('tentang');
 
 /*
 |--------------------------------------------------------------------------
