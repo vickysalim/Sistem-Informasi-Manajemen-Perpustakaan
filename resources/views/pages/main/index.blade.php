@@ -12,7 +12,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari buku" name="keyword">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                        <button class="btn btn-primary" type="submit">Cari</button>
                     </div>
                 </div>
             </form>
@@ -25,8 +25,8 @@
             <h4 class="text-center mb-4">Buku Terbaru</h4>
             <div class="d-flex flex-wrap justify-content-around">
                 @foreach ($bookData as $item)
-                    <a href="#" title="{{ $item->name }} - {{ $item->author }}">
-                        <img src="http://via.placeholder.com/120x192" alt="{{ $item->title }}" class="img-thumbnail" style="width: 120px; height: 192px;">
+                    <a href="{{ route('deskripsi', $item->id) }}" title="{{ $item->name }} - {{ $item->author }}">
+                        <img src="{{ asset('storage/cover/'.$item->cover_url) }}" alt="{{ $item->title }}" class="img-thumbnail" style="width: 120px; height: 192px;">
                     </a>
                 @endforeach
             </div>

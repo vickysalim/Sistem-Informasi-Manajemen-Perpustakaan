@@ -12,7 +12,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari buku" name="keyword" value="{{ request()->keyword }}">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                        <button class="btn btn-primary" type="submit">Cari</button>
                     </div>
                 </div>
             </form>
@@ -26,15 +26,20 @@
             <div class="row">
                 @foreach ($bookData as $item)
                     <div class="card col-12 mb-3">
-                        <a class="row" href="#">
+                        <a class="row" href="{{ route('deskripsi', $item->id) }}">
                             <div class="col-auto">
                                 <img src="{{ $item->cover_url != '' ? asset('storage/cover/'.$item->cover_url) : 'https://via.placeholder.com/120x192' }}" alt="{{ $item->title }}" class="img-thumbnail" style="width: 120px; height: 192px; box-shadow: 0 0 0 0 !important; border: 0 !important;">
                             </div>
                             <div class="col-auto">
-                                <h5>{{ $item->name }}</h5>
-                                <p style="color: black;">{{ $item->author }}</p>
-                                <p class="card-text"><small class="text-muted">{{ $item->publisher }} - {{ $item->year }}</small></p>
-                                <div class="badge {{ $item->status == 'Tersedia' ? 'badge-success' : 'badge-danger'}}">{{ $item->status }}</div>
+                                <h5 class="mt-2">{{ $item->name }}</h5>
+                                <div style="color: black;">{{ $item->author }}</div>
+                                <div>
+                                    <small class="text-muted">{{ $item->publisher }} - {{ $item->year }}</small>
+                                </div>
+                                <div>
+                                    <small class="text-muted">ISBN: {{ $item->isbn }}</small>
+                                </div>
+                                <div class="badge {{ $item->status == 'Tersedia' ? 'badge-success' : 'badge-danger'}} mt-4">{{ $item->status }}</div>
                             </div>
                         </a>
                     </div>
