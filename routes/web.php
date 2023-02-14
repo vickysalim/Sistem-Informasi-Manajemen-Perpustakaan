@@ -144,6 +144,10 @@ Route::delete('/dashboard/buku/{book}/hapus',
 
 // 404
 
+Route::get('/dashboard/buku/import', function () {
+    return abort(404);
+})->middleware(['role:Admin, Petugas']);
+
 Route::get('/dashboard/buku/{book}/edit', function () {
     return abort(404);
 })->middleware(['role:Admin, Petugas']);
