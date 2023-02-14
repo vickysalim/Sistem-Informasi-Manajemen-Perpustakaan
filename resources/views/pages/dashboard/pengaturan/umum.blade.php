@@ -100,9 +100,12 @@
                 <div class="form-group">
                     <label for="loanDuration">Logo Institusi</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="institution_logo" name="institution_logo" accept="image/*" required>
-                        <label class="custom-file-label" for="institution_logo" id="edit-institution-logo">Upload logo institusi (.jpg atau .png)</label>
+                        <input type="file" class="custom-file-input" id="institution_logo" name="institution_logo" accept="image/png" required>
+                        <label class="custom-file-label" for="institution_logo" id="edit-institution-logo">Upload logo institusi (.png)</label>
                     </div>
+                    @error('institution_logo')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                     @if ($settingsData[8]->value != null)
                         <a class="btn btn-link btn-sm p-0" target="_blank" href="{{ asset('storage/logo/'.$settingsData[8]->value) }}">Klik untuk akses logo</a>
                     @endif

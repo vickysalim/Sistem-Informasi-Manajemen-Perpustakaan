@@ -46,7 +46,7 @@ class GeneralController extends Controller
 
     public function updateLogo(Request $request) {
         $validate = $request->validate([
-            'institution_logo' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
+            'institution_logo' => 'required|file|image|mimes:png|max:2048'
         ]);
 
         try {
