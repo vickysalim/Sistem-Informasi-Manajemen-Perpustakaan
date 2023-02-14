@@ -28,4 +28,10 @@ class IndexController extends Controller
 
         return view('pages.main.search', compact('bookData'));
     }
+
+    public function show(Book $book) {
+        $bookData = Book::where('id', $book->id)->first();
+
+        return view('pages.main.buku', compact('bookData'));
+    }
 }

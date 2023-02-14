@@ -33,6 +33,10 @@ Route::get('/cari',
     [IndexController::class, 'search']
 )->name('cari');
 
+Route::get('/buku/{book}',
+    [IndexController::class, 'show']
+)->name('deskripsi');
+
 Route::get('/pengunjung',
     [VisitorController::class, 'index']
 )->name('pengunjung');
