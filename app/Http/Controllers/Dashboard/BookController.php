@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Imports\BooksImport;
 
 use App\Models\Book;
 
@@ -60,6 +64,38 @@ class BookController extends Controller
         }
         //redirect
         return redirect()->route('buku')->with('success', 'Berhasil menambahkan data buku');
+    }
+
+    public function import(Request $request) {
+        // validate
+		$validate = $request->validate([
+			'excel' => 'required|mimes:xls,xlsx'
+		]);
+        
+        // get file extension
+        $fileExtension = $validate['excel']->getClientOriginalExtension();
+
+        // generate random file name
+        $fileName = Str::random(32) . '.' . $fileExtension;
+
+        try {
+            // store file in temporary directory
+            $validate['excel']->storeAs('public/temp', $fileName);
+
+            // import data from excel
+            Excel::import(new BooksImport, storage_path('app\\public\\temp\\' . $fileName));
+
+            // delete temporary file
+            File::delete(storage_path('app\\public\\temp\\' . $fileName));
+        } catch (\Illuminate\Database\QueryException $qE) {
+            return redirect()->route('buku')->with('danger', 'Gagal mengimpor data buku, pastikan ID buku tidak pernah digunakan sebelumnya');
+        }
+        catch (\Exception $e) {
+            return redirect()->route('buku')->with('danger', 'Gagal mengimpor data buku');
+        }
+
+        // redirect
+        return redirect()->route('buku')->with('success', 'Berhasil mengimpor data buku');
     }
 
     public function update(Request $request, Book $book) {

@@ -130,6 +130,10 @@ Route::post('/dashboard/buku',
     [DashboardBookController::class, 'store']
 )->middleware(['role:Admin, Petugas'])->name('buku.store');
 
+Route::post('/dashboard/buku/import',
+    [DashboardBookController::class, 'import']
+)->middleware(['role:Admin, Petugas'])->name('buku.import');
+
 Route::put('/dashboard/buku/{book}/edit',
     [DashboardBookController::class, 'update']
 )->middleware(['role:Admin, Petugas'])->name('buku.update');
