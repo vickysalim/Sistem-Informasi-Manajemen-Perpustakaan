@@ -7,7 +7,11 @@
 
 @section('foundation')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">
+            @if (file_exists('storage/logo/logo.png'))
+                <img src="{{ asset('storage/logo/logo.png') }}" height="32" class="d-inline-block align-top" alt="">
+            @endif
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
