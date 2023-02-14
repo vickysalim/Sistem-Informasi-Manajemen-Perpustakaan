@@ -8,9 +8,9 @@
         <div class="container">
             <h1>Cari Buku</h1>
             <p class="lead text-muted">Masukkan kata kunci dari judul atau pengarang buku.</p>
-            <form action="#">
+            <form action="{{ route('cari') }}" method="GET">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cari buku" name="search">
+                    <input type="text" class="form-control" placeholder="Cari buku" name="keyword">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Cari</button>
                     </div>

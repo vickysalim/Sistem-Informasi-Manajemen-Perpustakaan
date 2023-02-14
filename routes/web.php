@@ -28,6 +28,10 @@ Route::get('/',
     [IndexController::class, 'index']
 )->name('main');
 
+Route::get('/cari',
+    [IndexController::class, 'search']
+)->name('cari');
+
 Route::get('/pengunjung', function () {
     return view('pages.main.pengunjung');
 })->name('pengunjung');
