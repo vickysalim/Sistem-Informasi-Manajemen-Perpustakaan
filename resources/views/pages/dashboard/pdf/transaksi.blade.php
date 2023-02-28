@@ -54,9 +54,9 @@
                 <tr>
                     <td class="text-center">{{ $loop->index + 1 }}</td>
                     <td>{{ $item->member_id }}232323</td>
-                    <td>{{ $item->Member->name }}</td>
+                    <td>{{ $item->Member->name ?? 'N/A' }}</td>
                     <td>{{ $item->book_id }}</td>
-                    <td class="text-center">{{ $item->Book->name }}</td>
+                    <td class="text-center">{{ $item->Book->name ?? 'N/A' }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->loan_date }}</td>
                     <td>{{ $item->return_date }}</td>
